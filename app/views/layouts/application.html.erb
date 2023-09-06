@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html long="ja">
+  <head>
+    <title>私と物のものがたり</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header class="<%= (admin_signed_in? ? "admin_header" : "" ) %>">
+      <div class="header-content">
+      <%= link_to 'TOP', (admin_signed_in? ? admin_top_path : root_path ), class: "logo" %>
+        <ul>
+          <% if admin_signed_in? %>
+            <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+          <% elsif user_signed_in? %>
+            <li><%= link_to 'マイページ', mypage_path %></li>
+            <li>
+              <%= link_to '投稿する', new_post_path %>
+            </li>
+            <li><%= link_to 'みんなの投稿', posts_path %></li>
+            <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to '新規登録', new_user_registration_path %></li>
+            <li><%= link_to 'ログイン', new_user_session_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </header>
+    <main>
+    <% flash.each do |message_type, message| %>
+      <div><%= message %></div>
+    <% end %>
+      <%= yield %>
+    </main>
+    <footer>Copyright © Infratop Inc. All Rights Reserved.</footer>
+  </body>
+</html>

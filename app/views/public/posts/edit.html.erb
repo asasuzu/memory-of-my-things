@@ -1,0 +1,46 @@
+<div class='container'>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+  		<h1>編集ページ</h1>
+    	<%= form_with model: @post do |f| %>
+	<%= render 'layouts/error_messages', resource: @post %>
+  <h4>タイトル</h4>
+  <%= f.text_field :title %>
+
+  <h4>本文</h4>
+<%= f.label :image, "画像" %>
+<div class="image-field">
+  <!-- プレビュー画像を表示するimg要素 -->
+  <img id="img-prev" src="<%= @post.image.attached? ? url_for(@post.image) : 'no_image.jpg' %>" alt="プレビュー画像" />
+
+  <!-- ファイル選択フィールド -->
+  <%= f.file_field :image, id: "image-input", accept: 'image/*' %>
+  <span>画像選択</span>
+  <p>選択するとプレビューされます。<br>画像未選択のままだと、「画像準備中」になります。</p>
+</div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const imageInput = document.getElementById("image-input");
+    const imgPreview = document.getElementById("img-prev");
+
+    imageInput.addEventListener("change", function () {
+      if (imageInput.files.length > 0) {
+        const file = imageInput.files[0];
+        const objectURL = URL.createObjectURL(file);
+        imgPreview.src = objectURL;
+      } else {
+        // 画像未選択時の処理（デフォルト画像を表示）
+        imgPreview.src = "no_image.jpg";
+      }
+    });
+  });
+</script>
+  <%= f.submit '更新' %>
+
+<% end %>
+  		<%= link_to 'Show', @post %> |
+  		<%= link_to 'Back', posts_path %>
+  </div>
+</div>
