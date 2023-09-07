@@ -1,0 +1,15 @@
+<% if post.flowered_by?(current_user) %>
+  <p>
+    <%= link_to post_flowers_path(post), method: :delete, remote: true do %>
+      <%= image_tag 'colorful_flower.png', alt: '色のついた花の絵', class: 'flower-icon' %>
+      <%= post.flowers.count %> おはな
+    <% end %>
+  </p>
+<% else %>
+  <p>
+    <%= link_to post_flowers_path(post), method: :post, remote: true do %>
+      <%= image_tag 'monochrome_flower.png', alt: 'モノクロの花の絵', class: 'flower-icon' %>
+      <%= post.flowers.count %> おはな
+    <% end %>
+  </p>
+<% end %>
