@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :flowers, dependent: :destroy
 
-  validates :name, length: { minimum: 1, maximum: 20 }
+  validates :name, presence: true, length: { minimum: 1, maximum: 50 }
 
   def get_profile_image(width, height)
     unless profile_image.attached?

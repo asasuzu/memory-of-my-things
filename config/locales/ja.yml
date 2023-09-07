@@ -67,10 +67,6 @@ ja:
     - 10月
     - 11月
     - 12月
-    order:
-    - :year
-    - :month
-    - :day
   datetime:
     distance_in_words:
       about_x_hours: 約%{count}時間
@@ -228,7 +224,7 @@ ja:
         address: 住所
         telephone_number: 電話番号
     models:
-      member: お客様情報
+     user: お客様情報
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。

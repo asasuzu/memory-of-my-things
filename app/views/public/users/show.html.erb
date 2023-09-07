@@ -1,2 +1,27 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
+<section class="inner">
+
+  <h2 class="section-ttl">マイページ</h2>
+	<h3>
+		登録情報
+		<%= link_to "編集する", edit_mypage_path, class: "btn btn-success ml2" %>
+		<%= link_to "パスワードを変更する", edit_user_registration_path, class: "btn btn-success ml2" %>
+	</h3>
+	<table class="customer_info mb3">
+		<thead>
+			<th></th>
+			<th></th>
+			<th></th>
+		</thead>
+		<tbody>
+			<tr><%= image_tag @user.get_profile_image(200,200) %></tr>
+			<tr>
+				<td>名前</td>
+				<td><%= @user.name %></td>
+			</tr>
+			<tr>
+				<td>メールアドレス</td>
+				<td colspan="2"><%= @user.email %></td>
+			</tr>
+		</tbody>
+	</table>
+</section>

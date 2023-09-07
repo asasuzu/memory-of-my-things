@@ -1,13 +1,13 @@
-<ul class="post-list">
+<div class="post-list">
   <% @posts.each do |post| %>
-    <li class="post-item">
-      <%= link_to post_path(post.id), class: 'post-link' do %>
-        <%= image_tag post.get_image(200, 150), class: 'post-image' %>
+    <%= link_to post_path(post.id), class: 'post-link' do %>
+      <div class="post-item">
+        <%= image_tag post.get_image(400, 400), class: 'post-image' %>
         <div class="post-details">
-          <p class="post-title"><%= post.title %></p>
-          <p class="post-description"><%= truncate(post.body, length: 15, omission: '...') %></p>
+          <h4 class="post-title"><%= post.title %></h4>
+          <p class="post-description"><%= post.body %></p>
         </div>
-      <% end %>
-    </li>
+      </div>
+    <% end %>
   <% end %>
-</ul>
+</div>
