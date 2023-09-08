@@ -1,36 +1,52 @@
-<div>
-  <%= image_tag @post.get_image(200,200) %>
-  <p>タイトル：<%= @post.title %></p>
-  <p>説明：<%= @post.body %></p>
-  <p>投稿ユーザー画像：<%= image_tag @post.user.get_profile_image(100,100) %></p>
-  <p>ユーザーネーム：<%= @post.user.name %></p>
-  <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-  <% if @post.user == current_user %>
-  <%= link_to '編集', edit_post_path(@post) %>
-  <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-  <% end %>
+<div class="post-detail">
+  <div class="post-detail__image">
+    <%= image_tag @post.get_image(700, 700) %>
+  </div>
+  <div class="post-detail__details">
+    <h2 class="post-detail__title"><%= @post.title %></h2>
 
-  <!--いいね機能-->
-  <div id="flower-btn_<%= @post.id %>">
-    <%= render "public/flowers/flower_btn", post: @post %>
-  </div>
-  
-  <!--コメント-->
-  <div>
-    <p>コメント件数：<%= @post.comments.count %></p>
-    <% @post.comments.each do |comment| %>
-      <p><%= image_tag comment.user.get_profile_image(100,100) %></p>
-      <%= comment.user.name %>
-      <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-      <% if comment.user == current_user %>
-      <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+    <p class="post-detail__description">思い出：<%= @post.body %></p>
+    <!-- お花機能はじめ-->
+    <div id="flower-btn_<%= @post.id %>">
+      <%= render "public/flowers/flower_btn", post: @post %>
+    </div>
+    <!--お花機能ここまで-->
+    <div class="post-detail__user-info">
+      <div class="user-info__avatar">
+        <%= image_tag @post.user.get_profile_image(200, 200) %>
+      </div>
+      <p class="user-info__name">ユーザーネーム：<%= @post.user.name %></p>
+      <p class="user-info__post-date">投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+    </div>
+    <% if @post.user == current_user %>
+      <%= link_to '編集', edit_post_path(@post) %>
+      <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+    <% end %>
+
+    <div class="post-detail__comment">
+      <p>コメント（<%= @post.comments.count %>）</p>
+      <!-- コメントのループ -->
+      <% @post.comments.each do |comment| %>
+        <div class="comment__list">
+          <p class="comment__user-avatar">
+            <%= image_tag comment.user.get_profile_image(120, 120) %>
+          </p>
+          <div class="comment__details">
+            <p class="comment__user"><%= comment.user.name %></p>
+            <p class="comment__date"><%= comment.created_at.strftime('%Y/%m/%d') %></p>
+            <p class="comment__text"><%= comment.comment %></p>
+            <% if comment.user == current_user %>
+              <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+            <% end %>
+          </div>
+        </div>
       <% end %>
-    <% end %>
-  </div>
-  <div>
-    <%= form_with(model:[@post, @comment], local: false) do |f| %>
-      <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-      <%= f.submit "送信する" %>
-    <% end %>
+    </div>
+    <div class="comment-form">
+      <%= form_with(model: [@post, @comment], local: false) do |f| %>
+        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+        <%= f.submit "送信する" %>
+      <% end %>
+    </div>
   </div>
 </div>

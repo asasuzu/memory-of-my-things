@@ -13,24 +13,37 @@
   <body>
     <header class="<%= (admin_signed_in? ? "admin_header" : "" ) %>">
       <div class="header-content">
-      <%= link_to 'TOP', (admin_signed_in? ? admin_top_path : root_path ), class: "logo" %>
-        <ul>
-          <% if admin_signed_in? %>
-            <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
-          <% elsif user_signed_in? %>
-            <li><%= link_to 'マイページ', mypage_path %></li>
-            <li>
-              <%= link_to '投稿する', new_post_path %>
-            </li>
-            <li><%= link_to 'みんなの投稿', posts_path %></li>
-            <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-          <% else %>
-            <li><%= link_to '新規登録', new_user_registration_path %></li>
-            <li><%= link_to 'ログイン', new_user_session_path %></li>
-          <% end %>
-        </ul>
+        <%= link_to (admin_signed_in? ? admin_top_path : root_path ), class: "logo" do %>
+          <%= image_tag 'logo.png', alt: '私と物のものがたり' %>
+        <% end %>
+        <nav>
+          <ul>
+            <% if admin_signed_in? %>
+              <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+            <% elsif user_signed_in? %>
+              <li class="<%= 'active' if current_page?(posts_path) %>">
+                <%= link_to 'みんなの投稿', posts_path %>
+              </li>
+              <li class="<%= 'active' if current_page?(new_post_path) %>">
+                <%= link_to '投稿する', new_post_path %>
+              </li>
+              <li class="<%= 'active' if current_page?(mypage_path) %>">
+                <%= link_to 'マイページ', mypage_path %>
+              </li>
+              <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+            <% else %>
+              <li class="<%= 'active' if current_page?(new_user_registration_path) %>">
+                <%= link_to '新規登録', new_user_registration_path %>
+              </li>
+              <li class="<%= 'active' if current_page?(new_user_session_path) %>">
+                <%= link_to 'ログイン', new_user_session_path %>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
       </div>
     </header>
+      
     <main>
     <% flash.each do |message_type, message| %>
       <div><%= message %></div>

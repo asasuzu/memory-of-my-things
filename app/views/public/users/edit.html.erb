@@ -1,19 +1,20 @@
 <div class='container'>
   <div class='row'>
-    <h2>ユーザー編集</h2>
+    <h2>プロフィール編集</h2>
     <%= form_with model: @user, url: update_mypage_path do |f| %>
     <%= render "layouts/error_messages", resource: @user %>
       <div class="form-group">
-        <%= f.label :name %>
+        <%= f.label :なまえ %>
         <%= f.text_field :name, class: "form-control name" %>
       </div>
      <div class="form-group">
-        <%= f.label :image %>
+        <%= f.label :プロフィール画像 %>
         <%= f.file_field :profile_image, class: "form-control-file user_image", accept: 'image/*' %>
       </div>
       <div class="form-group">
         <%= f.submit class: 'btn btn-secondary' %>
       </div>
     <% end %>
+    <%= link_to "パスワードの変更はこちら", edit_user_registration_path, class: "change-password-button" %>
   </div>
 </div>

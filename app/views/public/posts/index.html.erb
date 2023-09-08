@@ -1,13 +1,2 @@
-<div class="post-list">
-  <% @posts.each do |post| %>
-    <%= link_to post_path(post.id), class: 'post-link' do %>
-      <div class="post-item">
-        <%= image_tag post.get_image(400, 400), class: 'post-image' %>
-        <div class="post-details">
-          <h4 class="post-title"><%= post.title %></h4>
-          <p class="post-description"><%= post.body %></p>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
-</div>
+<h2 style = "margin-left: 20px" >みんなの投稿一覧</h2>
+<%= render 'layouts/index',posts: @posts %>

@@ -1,27 +1,13 @@
-<section class="inner">
+<div class="mypage-container">
+  <h2 class="mypage-title">マイページ</h2>
+  <h3 class="user-name"><%= @user.name %> さん</h3>
+  <div class="user-image">
+    <%= image_tag @user.get_profile_image(400, 400) %>
+  </div>
+  <h3>
+    <%= link_to "プロフィールを編集", edit_mypage_path, class: "edit-profile-button" %>
+  </h3>
+</div>
 
-  <h2 class="section-ttl">マイページ</h2>
-	<h3>
-		登録情報
-		<%= link_to "編集する", edit_mypage_path, class: "btn btn-success ml2" %>
-		<%= link_to "パスワードを変更する", edit_user_registration_path, class: "btn btn-success ml2" %>
-	</h3>
-	<table class="customer_info mb3">
-		<thead>
-			<th></th>
-			<th></th>
-			<th></th>
-		</thead>
-		<tbody>
-			<tr><%= image_tag @user.get_profile_image(200,200) %></tr>
-			<tr>
-				<td>名前</td>
-				<td><%= @user.name %></td>
-			</tr>
-			<tr>
-				<td>メールアドレス</td>
-				<td colspan="2"><%= @user.email %></td>
-			</tr>
-		</tbody>
-	</table>
-</section>
+<h3><%= @user.name %> さんの投稿一覧</h3>
+<%= render 'layouts/index',posts: @posts %>
