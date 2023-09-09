@@ -6,13 +6,12 @@ class Public::PostsController < ApplicationController
   end
 
   def create
-    post = Post.new(post_params)
-    post.user_id = current_user.id
-    if post.save
-      redirect_to post_path(post), notice: "投稿に成功しました"
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
+    if @post.save
+      redirect_to post_path(@post), notice: "投稿に成功しました"
     else
-      @posts = Post.all
-      render 'index'
+      render 'new'
     end
   end
 
@@ -31,7 +30,7 @@ class Public::PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to post_path(@post), notice: "更新に成功しました."
     else
-      render 'show'
+      render 'edit'
     end
   end
 
@@ -39,6 +38,7 @@ class Public::PostsController < ApplicationController
     if @post.destroy
       redirect_to posts_path, notice: "削除に成功しました."
     else
+      @comment = Comment.new
       render 'show'
     end
   end

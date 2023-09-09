@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'messages/index'
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   devise_for :users, controllers: {
@@ -6,7 +9,7 @@ Rails.application.routes.draw do
   sessions: 'public/sessions'
   }
 
-  # 顧客用
+  # 会員側
   scope module: :public do
     root to: "homes#top"
     get "users/mypage" => "users#show", as: 'mypage'
@@ -20,17 +23,19 @@ Rails.application.routes.draw do
     end
   end
 
-# 管理者用
+# 管理者側
 # URL /admin/sign_in ...
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
 
-  #管理者用
+  #管理者側
   namespace :admin do
-    root to: "homes#top"
+    # root to: "reports#index"
     resources :posts, only: [:destroy]
     resources :users, only: [:index, :show, :edit, :update]
+    resources :messages, only: [:index, :create, :edit, :update]
+    resources :reports, only: [:index, :edit, :update, :destroy]
   end
 
 end

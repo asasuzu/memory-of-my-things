@@ -4,8 +4,8 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :flowers, dependent: :destroy
 
-  validates :title, presence: { message: "タイトルを入力してください" }
-  validates :body, presence: { message: "本文を入力してください" }, length: { maximum: 200, message: "本文は200文字以内で入力してください" }
+  validates :title, presence: true, length: { maximum: 50 }
+  validates :body, presence: true, length: { maximum: 200 }
 
   def get_image(width, height)
     unless image.attached?

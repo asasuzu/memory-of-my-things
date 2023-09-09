@@ -5,10 +5,13 @@ class Public::CommentsController < ApplicationController
     comment = current_user.comments.new(comment_params)
     comment.post_id = post.id
     if comment.save
-    redirect_to post_path(post)
+      flash[:notice] = "こめんとに成功しました"
+      redirect_to request.referer
     else
-      flash.now[:notice] = "コメントの保存に失敗しました。"
-      render 'public/posts/show', post: post
+      flash.now[:notice] = "コメントは１文字以上１００文字以下でお願いします"
+      @post = Post.find(params[:post_id])
+      @comment = Comment.new
+      render 'public/posts/show'
     end
   end
 
@@ -16,10 +19,12 @@ class Public::CommentsController < ApplicationController
     comment = Comment.find(params[:id])
     post = comment.post
     if comment.destroy
-      redirect_to post_path(post), notice: "コメントの削除に成功しました。"
+      redirect_to request.referer, notice: "コメントの削除に成功しました。"
     else
       flash.now[:notice] = "コメントの削除に失敗しました。"
-      render 'public/posts/show', post: post
+      @post = Post.find(params[:post_id])
+      @comment = Comment.new
+      render 'public/posts/show'
     end
   end
 
