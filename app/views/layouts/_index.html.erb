@@ -3,9 +3,15 @@
     <%= link_to post_path(post.id), class: 'post-list__link' do %>
       <div class="post-list__item">
         <%= image_tag post.get_image(400, 400) %>
-        <h4 class="post-list__title"><%= post.title %></h4>
+        <h4 class="post-list__title">
+          <% if !post.is_public? %>
+            <i class="fas fa-lock"></i>
+          <% end %>
+          <%= post.title %>
+        </h4>
         <p class="post-list__description"><%= post.body %></p>
       </div>
     <% end %>
   <% end %>
 </div>
+<div class="post-list__paginate"><%= paginate posts %></div>

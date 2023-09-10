@@ -7,6 +7,8 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { maximum: 50 }
   validates :body, presence: true, length: { maximum: 200 }
 
+ enum spend_time: { unknown: 0, less_than_one_year: 1, one_to_three_years: 2, three_to_five_years: 3, five_or_more_years: 4 }
+
   def get_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/noimage.jpg')

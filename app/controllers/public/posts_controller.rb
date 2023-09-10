@@ -1,6 +1,7 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_user!
   before_action :ensure_post, only: [:show, :edit, :update, :destroy]
-  
+
   def new
     @post = Post.new
   end
@@ -16,11 +17,17 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.where(is_public: true).order(created_at: :desc).page(params[:page]).per(4)
   end
 
   def show
     @comment = Comment.new
+    # 投稿が公開中　or　投稿したユーザーが現在ログイン中のユーザーの場合
+    if @post.is_public || current_user == @post.user
+    else
+    # それ以外の場合、TOPへ遷移
+      redirect_to root_path
+    end
   end
 
   def edit
@@ -46,7 +53,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :image, :is_public)
+    params.require(:post).permit(:title, :body, :image, :is_public, :spend_time)
   end
 
   def ensure_post

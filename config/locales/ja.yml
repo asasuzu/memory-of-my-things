@@ -8,10 +8,17 @@ ja:
       truncate: "..."
   enums:
     post:
-      is_public:
-        private: "非公開"
-        public: "公開"
+      spend_time:
+        unknown: "不明"
+        less_than_one_year: "１年未満"
+        one_to_three_years: "１年以上３年未満"
+        three_to_five_years: "３年以上５年未満"
+        five_or_more_years: "５年以上"
   activerecord:
+    attributes:
+      post:
+        title: "タイトル"
+        body: "別れの言葉"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

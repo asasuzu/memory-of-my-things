@@ -3,7 +3,11 @@ class Public::UsersController < ApplicationController
   before_action :set_current_user
 
   def show
-    @posts = @user.posts
+    if params[:show_private] == '1'
+      @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(4)
+    else
+      @posts = @user.posts.where(is_public: true).order(created_at: :desc).page(params[:page]).per(4)
+    end
   end
 
   def edit

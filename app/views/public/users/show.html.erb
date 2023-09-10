@@ -10,4 +10,15 @@
 </div>
 
 <h3><%= @user.name %> さんの投稿一覧</h3>
+<%= form_with(model: @post, url: mypage_path, method: "get") do |f| %>
+  <% if params[:show_private] == '1' %>
+    <%= f.check_box :show_private, checked: true %>
+  <% else %>
+    <%= f.check_box :show_private %>
+  <% end %>
+  <%= f.label :show_private do %>
+    <i class="fas fa-lock"></i> 非公開
+  <% end %>
+  <%= f.submit '表示' %>
+<% end %>
 <%= render 'layouts/index',posts: @posts %>

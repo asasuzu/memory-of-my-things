@@ -3,9 +3,14 @@
     <%= image_tag @post.get_image(700, 700) %>
   </div>
   <div class="post-detail__details">
-    <h2 class="post-detail__title"><%= @post.title %></h2>
-
-    <p class="post-detail__description">思い出：<%= @post.body %></p>
+    <h2 class="post-detail__title">
+      <% if !@post.is_public? %>
+        <i class="fas fa-lock"></i>
+      <% end %>
+      <%= @post.title %>
+    </h2>
+    <p class="post-detail__description">別れの言葉：<%= @post.body %></p>
+    <p><strong>一緒に過ごした期間:</strong> <%= @post.spend_time_i18n %></p>
     <!-- お花機能はじめ-->
     <div id="flower-btn_<%= @post.id %>">
       <%= render "public/flowers/flower_btn", post: @post %>

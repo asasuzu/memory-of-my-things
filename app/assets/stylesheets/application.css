@@ -24,16 +24,17 @@
 body {
   max-width: 1200px;
   margin: 0 auto;
+  display:flex;
+  flex-direction:column;
+ 	min-height: 100vh;
+}
+
+main{
+  flex: 1;
 }
 /*-----ヘッダー-----*/
 header {
   margin-bottom: 25px;
-}
-
-.header-content {
-  display: flex;
-  flex-flow: column;
-  width: 100%;
 }
 
 .logo img {
@@ -129,6 +130,35 @@ nav a:hover {
 .post-list__link:hover {
   opacity: 0.6; /* ホバー時に若干透明度を下げる */
 }
+
+.post-list__paginate{
+  margin-top: 10px;
+}
+
+.pagination{
+  text-align: center;
+}
+
+/* ページネーションのリンク文字（a） */
+.pagination a{
+  color: #818181;
+  padding: 8px;
+}
+
+/* ページネーションの文字にカーソルを載せた時 */
+.pagination a:hover{
+  background-color: #818181;
+  color: #FFF;
+  border-radius: 20%;
+}
+
+/* 現在のページの数字についての表記 */
+.current{
+  font-weight: bold;
+  font-size: 17px;
+  margin: 0 8px;
+}
+
 
 /* -----投稿詳細----- */
 .post-detail {
@@ -308,4 +338,12 @@ nav a:hover {
 .change-password-button:hover {
   background-color: #c0c0c0;
   opacity: 0.8;
+}
+
+
+
+
+footer {
+  padding: 3em;
+  text-align: center;
 }
