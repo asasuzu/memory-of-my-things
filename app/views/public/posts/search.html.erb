@@ -1,0 +1,22 @@
+<%= render 'search-form' %>
+<section class="inner">
+  <% if params[:keyword].present? %>
+    <h2 class="section-ttl"><%= "#{params[:keyword]} の検索結果" %></h2>
+  <% else %>
+    <h2 class="section-ttl">検索結果</h2>
+  <% end %>
+
+  <% if params[:spend_time].present? %>
+    <p>一緒に過ごした期間：<%= I18n.t("enums.post.spend_time.#{params[:spend_time]}") %></p>
+  <% end %>
+
+  <% if @result.present? %>
+    <%= render 'index', posts: @result %>
+  <% else %>
+    <% if params[:keyword].blank? && params[:spend_time].blank? %>
+      <h3>キーワード、または一緒に過ごした期間を指定してください。</h3>
+    <% else %>
+      <h3>見つかりませんでした。検索条件を変更して再度お試しください。</h3>
+    <% end %>
+  <% end %>
+</section>

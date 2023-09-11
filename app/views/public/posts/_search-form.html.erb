@@ -1,0 +1,11 @@
+<%= form_with(url: search_posts_path, method: "get") do |f| %>
+  <div class="form-group">
+    <%= f.text_field :keyword, class: "form-control", placeholder: "キーワードで検索" %>
+  </div>
+  <div class="form-group">
+    一緒に過ごした期間：<%= f.select :spend_time, Post.spend_times.keys.map { |k| [I18n.t("enums.post.spend_time.#{k}"), k] }, include_blank: "指定なし" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit "検索" %>
+  </div>
+<% end %>

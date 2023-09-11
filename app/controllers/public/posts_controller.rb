@@ -17,7 +17,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.where(is_public: true).order(created_at: :desc).page(params[:page]).per(4)
+    @posts = Post.public_and_newest.page(params[:page]).per(4)
   end
 
   def show
@@ -25,7 +25,7 @@ class Public::PostsController < ApplicationController
     # 投稿が公開中　or　投稿したユーザーが現在ログイン中のユーザーの場合
     if @post.is_public || current_user == @post.user
     else
-    # それ以外の場合、TOPへ遷移
+    # 投稿が非公開かつ投稿したユーザーが現在ログインユーザーではない場合
       redirect_to root_path
     end
   end
@@ -47,6 +47,17 @@ class Public::PostsController < ApplicationController
     else
       @comment = Comment.new
       render 'show'
+    end
+  end
+  
+  def search
+    keyword = params[:keyword]
+    spend_time = params[:spend_time]
+
+    if keyword.present? || spend_time.present?
+      @result = Post.search(keyword, spend_time).page(params[:page]).per(10)
+    else
+      @result = []
     end
   end
 

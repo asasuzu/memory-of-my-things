@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # 会員側
   scope module: :public do
     root to: "homes#top"
+    get 'search' => 'posts#search', as: 'search_posts'
     get "users/mypage" => "users#show", as: 'mypage'
     get 'users/mypage/edit' => 'users#edit', as: 'edit_mypage'
     patch 'users/mypage' => 'users#update', as: 'update_mypage'
