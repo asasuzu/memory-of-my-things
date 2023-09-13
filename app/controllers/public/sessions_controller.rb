@@ -2,7 +2,23 @@
 
 class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-
+  def guest_sign_in
+    user = User.create_guest
+    sign_in(user)
+    redirect_to root_path,
+    notice: 'ゲストユーザーとしてログインしました。投稿やコメントはログアウトすると削除されます。'
+  end
+  
+    # ゲストユーザーのログアウト
+  def guest_sign_out
+    if current_user.guest?
+      current_user.destroy  # ゲストユーザーを削除する
+      sign_out(current_user)  # ログアウト
+      redirect_to root_path, notice: 'ログアウトしました。ゲストアカウントは削除されます。'
+    else
+      redirect_to root_path
+    end
+  end
   # GET /resource/sign_in
   # def new
   #   super

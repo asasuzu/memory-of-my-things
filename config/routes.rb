@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   sessions: 'public/sessions'
   }
 
+  devise_scope :user do
+    post 'guest_sign_in', to: 'public/sessions#guest_sign_in'
+    delete 'guest_sign_out', to: 'public/sessions#guest_sign_out'
+  end
+
   # 会員側
   scope module: :public do
     root to: "homes#top"

@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :search]
   before_action :ensure_post, only: [:show, :edit, :update, :destroy]
 
   def new
@@ -46,7 +46,7 @@ class Public::PostsController < ApplicationController
       redirect_to posts_path, notice: "削除に成功しました."
     else
       @comment = Comment.new
-      render 'show'
+      render 'edit'
     end
   end
   

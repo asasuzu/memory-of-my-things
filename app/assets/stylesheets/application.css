@@ -34,7 +34,7 @@ main{
 }
 /*-----ヘッダー-----*/
 header {
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 
 .logo img {
@@ -154,17 +154,22 @@ nav a:hover {
 
 /* 現在のページの数字についての表記 */
 .current{
-  font-weight: bold;
-  font-size: 17px;
-  margin: 0 8px;
+  padding: 8px 4px 8px 8px;
+  background-color: #818181;
+  color: #FFF;
+  border-radius: 20%;
 }
 
+/* 最後のページ番号が現在のページの場合 */
+.current:last-child {
+  padding-right: 8px; /* 最後の数字にのみ右パディングを適用 */
+}
 
 /* -----投稿詳細----- */
 .post-detail {
   display: flex;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 10px auto;
 }
 
 .post-detail__image {
@@ -178,113 +183,155 @@ nav a:hover {
 
 }
 
-.post-detail__details {
+.post-detail__content {
   width: 50%;
   margin-left:20px;
-  background-color:pink;
 }
 
 .post-detail__title {
-  font-size: 20px;
   font-weight: bold;
-  margin-top: 0;
 }
 
 .post-detail__description {
-  margin-top: 5px;
+  margin: 1em auto; /* ボックスの余白 */
+  padding: 2em;
+  position: relative;
+  border-radius: 10px; /* 角を丸くする */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* 影を追加する */
+  background-color: #f0f0f0;
 }
 
-.flower-btn {
-  margin: 10px;
-  display: flex;
-  align-items: center;
+.description__title {
+  background-color: gray; /* タイトル背景色 */
+  font-size: 14px;/* タイトル文字の大きさ */
+  color : white;
+  padding: 7px 10px;/*タイトルの余白*/
+  line-height: 1;/*タイトルの行の高さ*/
+  position:absolute;	/* 配置(ここを動かす) */
+  top: -10px; /*上から（0px）移動*/
+  left: 30px; /*左から(0px)移動*/
+}
+
+.flower-content {
+  text-align: right;
 }
 
 .flower-icon {
-  width: 30px;
-  height: 30px;
-  margin-right: 5px;
-  transition: transform 0.2s;
+  width: 40px;
+  height: 40px;
+  margin-left: 5px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .flower-text {
-  font-size: 14px;
+  font-size: 17px;
   color: gray;
-}
-
-.flower-btn:hover .flower-icon {
-  transform: scale(1.2);
-}
-
-.flower-btn:hover .flower-text {
-  color: #333;
+  display: inline-block;
+  vertical-align: middle;
+  text-decoration: underline;
 }
 
 
 .post-detail__user-info {
-  margin-top: 20px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* ユーザー情報を左寄せ */
-}
-
-.user-info__avatar {
-
+  align-items: center; /* 垂直方向の中央揃え */
+  margin-bottom: 15px;
 }
 
 .user-info__avatar img {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   overflow: hidden;
   justify-content: center;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* 影の設定 */
+}
+
+.user-info__details {
+  margin-left: 20px; /* プロフィール画像との間隔を調整 */
 }
 
 .user-info__name {
   font-weight: bold;
+  font-size: 20px;
 }
 
 .user-info__post-date {
   color: gray;
+  font-size: 12px;
+}
+
+/* 編集ボタン*/
+.edit-button-container {
+  text-align: right; /* ボタンを右寄せにする */
+}
+
+.edit-button {
+  padding: 10px 20px;
+  color: #e83929;
+  border: 1px solid #e83929;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+/* ホバー時のスタイル */
+.edit-button:hover {
+  background-color: #e83929;
+  color: #fff;
 }
 
 .post-detail__comment {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .comment__list {
   display: flex;
-  align-items: flex-start; /* コメントを左寄せ */
-  margin-bottom: 15px; /* コメント間の間隔を設定 */
+  margin-bottom: 20px;
 }
 
 .comment__user-avatar {
-
+  margin-right: 10px;
 }
+
 .comment__user-avatar img{
   width: 60px;
   height: 60px;
   border-radius: 50%;
   overflow: hidden;
-  justify-content: center;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2); /* 影の設定 */
 }
 
 .comment__details {
-  flex: 1; /* コメントのコンテンツ領域を最大に拡張 */
+  flex-grow: 1;
 }
 
 .comment__user-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
   font-weight: bold;
+  font-size:16px;
+}
+
+.comment__text-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .comment__date {
+  font-size: 12px;
   color: gray;
 }
 
-.comment-form {
-  margin-top: 20px;
+.comment__form{
+  text-align: right;
+}
+
+.comment__form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 /* マイページのスタイル */
@@ -342,6 +389,38 @@ nav a:hover {
 
 
 
+input[type="text"] {
+        width: 300px;
+        height: 2em;
+    }
+
+input[type="password"] {
+        width: 300px;
+        height: 2em;
+    }
+
+input[type="submit"] {
+        width: 70px;
+        height: 2em;
+    }
+
+.search-form {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 5px 10px;
+
+}
+
+.search-input {
+  margin-right: 10px;
+  font-size: 4px;
+}
+
+.search-button {
+  white-space: nowrap;
+}
 
 footer {
   padding: 3em;

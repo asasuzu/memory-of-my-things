@@ -6,7 +6,6 @@
     <script src="https://kit.fontawesome.com/12827ddbda.js" crossorigin="anonymous"></script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -40,25 +39,35 @@
               <li class="<%= 'active' if current_page?(mypage_path) %>">
                 <%= link_to 'マイページ', mypage_path %>
               </li>
+              <% if current_user.guest? %>
+                <li>
+                  <%= link_to 'ゲストユーザーからログアウト', guest_sign_out_path, method: :delete %>
+                </li>
+              <% else %>
               <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+              <% end %>
             <% else %>
+              <li class="<%= 'active' if current_page?(posts_path) %>">
+                <%= link_to 'みんなの投稿', posts_path %>
+              </li>
               <li class="<%= 'active' if current_page?(new_user_registration_path) %>">
                 <%= link_to '新規登録', new_user_registration_path %>
               </li>
               <li class="<%= 'active' if current_page?(new_user_session_path) %>">
                 <%= link_to 'ログイン', new_user_session_path %>
               </li>
+              <li>
+                <%= link_to 'ゲストログイン', guest_sign_in_path, method: :post %>
+              </li>
             <% end %>
           </ul>
         </nav>
       </div>
     </header>
-
     <main>
-    <% flash.each do |message_type, message| %>
-      <div class="flash-message <%= message_type %>"><%= message %></div>
-    <% end %>
-
+      <% flash.each do |message_type, message| %>
+        <div class="flash-message <%= message_type %>"><%= message %></div>
+      <% end %>
       <%= yield %>
     </main>
     <footer>&copy; 2023 marin<i class="far fa-star"></i>kato</footer>
