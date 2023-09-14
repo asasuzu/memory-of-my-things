@@ -10,8 +10,10 @@ class User < ApplicationRecord
   has_many :flowers, dependent: :destroy
 
   validates :name, presence: true, length: { minimum: 1, maximum: 50 }
-
+  
+  # ゲストユーザーのメールアドレス
   GUEST_USER_EMAIL = "guest@example.com"
+  
   # ゲストユーザーを作成するメソッド
   def self.create_guest
     find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
@@ -20,10 +22,12 @@ class User < ApplicationRecord
     end
   end
 
+  # ゲストユーザーかどうかを確認するメソッド
   def guest?
     email == GUEST_USER_EMAIL
   end
 
+  # プロフィール画像を取得するメソッド
   def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/default_user.jpg')
@@ -31,5 +35,4 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
-
 end

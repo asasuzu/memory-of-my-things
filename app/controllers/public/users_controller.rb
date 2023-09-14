@@ -4,9 +4,11 @@ class Public::UsersController < ApplicationController
 
   def show
     if params[:show_private] == '1'
+    # '1' の場合、プライベートな投稿も表示
       @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(4)
     else
-      @posts = @user.posts.where(is_public: true).order(created_at: :desc).page(params[:page]).per(4)
+    # それ以外の場合、公開されている投稿のみ表示
+      @posts = @user.posts.public_and_newest.page(params[:page]).per(4)
     end
   end
 

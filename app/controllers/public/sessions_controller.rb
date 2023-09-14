@@ -6,7 +6,7 @@ class Public::SessionsController < Devise::SessionsController
     user = User.create_guest
     sign_in(user)
     redirect_to root_path,
-    notice: 'ゲストユーザーとしてログインしました。投稿やコメントはログアウトすると削除されます。'
+    notice: 'ゲストユーザーとしてログインしました。投稿やコメントはログアウト後に削除されます。'
   end
   
     # ゲストユーザーのログアウト
@@ -14,7 +14,7 @@ class Public::SessionsController < Devise::SessionsController
     if current_user.guest?
       current_user.destroy  # ゲストユーザーを削除する
       sign_out(current_user)  # ログアウト
-      redirect_to root_path, notice: 'ログアウトしました。ゲストアカウントは削除されます。'
+      redirect_to root_path, notice: 'ゲストユーザーアカウントが削除されました。'
     else
       redirect_to root_path
     end
