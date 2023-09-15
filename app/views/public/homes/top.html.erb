@@ -1,2 +1,18 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div id="main-visual">
+  <img src="/assets/main-visual.png" alt="メインビジュアル">
+  <div class="overlay-text">
+    <h3>捨てる物。記録共有サイト</h3>
+    <p>日々、様々な物と出会い、必要がなくなれば捨てていく。<br>
+    その日常の些細な瞬間を、感謝の気持ちとともに共有してみませんか。<br>
+    餞（はなむけ）の花を贈ってお別れの瞬間をみんなと共有しましょう。<br>
+    物を捨てることは、人生の整理整頓の第一歩です。<br>
+    捨てることは、過去を閉じるのではなく、
+    新たな思い出を生み出すための一歩なのです。</p>
+  </div>
+</div>
+
+
+
+<%= render 'public/posts/search-form' %>
+<h2 style = "margin-left: 20px" >新着投稿</h2>
+<%= render 'public/posts/index',posts: @posts %>
