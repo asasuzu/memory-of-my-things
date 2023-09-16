@@ -1,11 +1,11 @@
 <div class="mypage-container">
   <h2 class="user-name"><%= @user.name %> さん</h2>
   <div class="user-image">
-    <%= image_tag @user.get_profile_image(400, 400) %>
+    <%= image_tag @user.get_profile_image(300, 300) %>
   </div>
-  <h3>
-    <%= link_to "プロフィールを編集", edit_mypage_path, class: "edit-profile-button" %>
-  </h3>
+  <div>
+    <%= link_to "プロフィールを編集", edit_mypage_path, class: "user-edit-btn" %>
+  </div>
 </div>
 <%= link_to "花むけした投稿を見る", mypage_flowering_path %>
 <h3><%= @user.name %> さんの投稿一覧</h3>

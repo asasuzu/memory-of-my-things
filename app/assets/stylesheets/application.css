@@ -32,6 +32,7 @@ body {
 main{
   flex: 1;
 }
+
 /*-----ヘッダー-----*/
 header {
   margin-bottom: 10px;
@@ -81,7 +82,6 @@ nav a:hover {
   transform: scale(1.07);
 }
 
-
 #main-visual {
   position: relative;
   text-align: center;
@@ -90,7 +90,7 @@ nav a:hover {
 
 #main-visual img {
   width: 100%;
-  max-height: 37em; /* 適切な値を設定 */
+  max-height: 37em;
 }
 
 .main-visual__text {
@@ -156,7 +156,7 @@ nav a:hover {
 
 .post-list__link {
   color: inherit; /* リンクのテキストカラーを親要素の色に合わせる */
-  display: block; /* リンクをブロック要素に変更して全体をクリック可能に */
+  display: block;
   transition: opacity 0.3s; /* ホバー時のトランジションを追加 */
 }
 /* ホバー時のスタイル */
@@ -195,7 +195,7 @@ nav a:hover {
 
 /* 最後のページ番号が現在のページの場合 */
 .current:last-child {
-  padding-right: 8px; /* 最後の数字にのみ右パディングを適用 */
+  padding-right: 8px; /* 最後の数字のみ右パディングを適用 */
 }
 
 /* -----投稿詳細----- */
@@ -226,20 +226,20 @@ nav a:hover {
 }
 
 .post-detail__description {
-  margin: 1em auto; /* ボックスの余白 */
+  margin: 1em auto;
   padding: 2em;
   position: relative;
-  border-radius: 10px; /* 角を丸くする */
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* 影を追加する */
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   background-color: #f0f0f0;
 }
 
 .description__title {
-  background-color: gray; /* タイトル背景色 */
-  font-size: 14px;/* タイトル文字の大きさ */
+  background-color: gray;
+  font-size: 14px;
   color : white;
-  padding: 7px 10px;/*タイトルの余白*/
-  line-height: 1;/*タイトルの行の高さ*/
+  padding: 7px 10px;
+  line-height: 1;
   position:absolute;	/* 配置(ここを動かす) */
   top: -10px; /*上から（0px）移動*/
   left: 30px; /*左から(0px)移動*/
@@ -268,7 +268,7 @@ nav a:hover {
 
 .post-detail__user-info {
   display: flex;
-  align-items: center; /* 垂直方向の中央揃え */
+  align-items: center;
   margin-bottom: 15px;
 }
 
@@ -281,7 +281,7 @@ nav a:hover {
 }
 
 .user-info__details {
-  margin-left: 20px; /* プロフィール画像との間隔を調整 */
+  margin-left: 20px;
 }
 
 .user-info__name {
@@ -296,10 +296,10 @@ nav a:hover {
 
 /* 編集ボタン*/
 .edit-button-container {
-  text-align: right; /* ボタンを右寄せにする */
+  text-align: right;
 }
 
-.edit-button {
+.edit-btn {
   padding: 10px 20px;
   color: #e83929;
   border: 1px solid #e83929;
@@ -307,8 +307,7 @@ nav a:hover {
   transition: background-color 0.3s;
 }
 
-/* ホバー時のスタイル */
-.edit-button:hover {
+.edit-btn:hover {
   background-color: #e83929;
   color: #fff;
 }
@@ -384,6 +383,7 @@ nav a:hover {
 
 .user-image {
   margin: 5px;
+  margin-bottom: 15px;
 }
 
 .user-image img {
@@ -394,43 +394,86 @@ nav a:hover {
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
 }
 
-.edit-profile-button,
-.change-password-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
+.user-edit-btn {
+  padding: 10px 20px;
+  background-color: #a0a0a0;
+  color: #fff;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.user-edit-btn:hover {
+  background-color: #808080;
+  color: #fff;
+}
+
+
+/*---新規（編集）投稿フォーム---*/
+.form_title{
+  text-align:center;
+  margin-top: 20px;
+}
+
+.post_form {
+  max-width: 500px;
   margin: 0 auto;
-  padding: .5em 1em;
-  box-shadow: inset -1px -1px #333, inset 1px 1px #fff, inset -2px -2px #999, inset 2px 2px #ffffff;
-  background-color: #d6d6d6;
-  color: #333;
-  font-size: 13px;
-  outline: 1px dotted #333;
-  outline-offset: -4px;
+  padding: 10px;
 }
 
-.edit-profile-button:hover,
-.change-password-button:hover {
-  background-color: #c0c0c0;
-  opacity: 0.8;
+.form_field{
+  margin-bottom: 20px;
 }
 
+.form_submit{
+  text-align: center;
+}
 
+.submit-btn {
+  width: 70%;
+  height: 40px;
+  font-size: 16px;
+  background-color: #a0a0a0;
+  color: white;
+  transition: background-color 0.3s;
+  margin-bottom: 30px;
+}
 
-input[type="text"] {
-        width: 300px;
-        height: 2em;
-    }
+/* ボタンにホバーしたときのスタイル */
+.submit-btn:hover {
+  background-color: #808080;
+}
 
-input[type="password"] {
-        width: 300px;
-        height: 2em;
-    }
+.red-btn{
+  width: 70%;
+  height: 40px;
+  color: #e83929;
+  border: 1px solid #e83929;
+  transition: background-color 0.3s;
+  display: inline-block;
+  border-radius: 5px;
+  padding: 8px 20px;
+}
+
+.red-btn:hover {
+  background-color: #e83929;
+  color: #fff;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 
 input[type="submit"] {
-        width: 70px;
-        height: 2em;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 20px;
     }
 
 .search-form {
@@ -439,7 +482,6 @@ input[type="submit"] {
   align-items: center;
   flex-wrap: wrap;
   margin: 5px 10px;
-
 }
 
 .search-input {

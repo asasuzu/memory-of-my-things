@@ -37,7 +37,7 @@
     <!-- 編集ボタン -->
     <div class="edit-button-container">
       <% if @post.user == current_user %>
-        <%= link_to '投稿を編集（削除）', edit_post_path(@post), class: 'edit-button' %>
+        <%= link_to '投稿を編集（削除）', edit_post_path(@post), class: 'edit-btn' %>
       <% end %>
     </div>
     

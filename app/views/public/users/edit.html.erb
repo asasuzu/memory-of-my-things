@@ -1,20 +1,23 @@
-<div class='container'>
-  <div class='row'>
-    <h2>プロフィール編集</h2>
-    <%= form_with model: @user, url: update_mypage_path do |f| %>
+<h2 class="form_title">プロフィール編集</h2>
+<div class="post_form">
+  <%= form_with model: @user, url: update_mypage_path do |f| %>
     <%= render "layouts/error_messages", resource: @user %>
-      <div class="form-group">
-        <%= f.label :なまえ %>
-        <%= f.text_field :name, class: "form-control name" %>
-      </div>
-     <div class="form-group">
-        <%= f.label :プロフィール画像 %>
-        <%= f.file_field :profile_image, class: "form-control-file user_image", accept: 'image/*' %>
-      </div>
-      <div class="form-group">
-        <%= f.submit class: 'btn btn-secondary' %>
-      </div>
-    <% end %>
-    <%= link_to "パスワードの変更はこちら", edit_user_registration_path, class: "change-password-button" %>
-  </div>
+    <div class="form_field">
+      <%= f.label :プロフィール画像 %>
+      <div><%= f.file_field :profile_image, accept: 'image/*' %></div>
+    </div>
+    <div class="form_field">
+      <%= f.label :名前 %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="form_submit">
+      <%= f.submit '更新する', class: "submit-btn" %>
+    </div>
+  <% end %>
+  <!-- ゲストユーザーでない場合、パスワード変更ボタンを表示 -->
+  <% unless current_user.guest? %>
+    <div class="form_submit">
+      <%= link_to "パスワードの変更はこちら", edit_user_registration_path, class: 'red-btn' %>
+    </div>
+  <% end %>
 </div>

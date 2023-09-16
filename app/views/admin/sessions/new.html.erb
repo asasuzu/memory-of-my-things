@@ -1,22 +1,18 @@
-<section class="inner">
-  <h2 class="section-ttl">管理者ログイン</h2>
-
-  <%= form_with model: @admin, url: session_path(resource_name), local: true do |f| %>
-    <div class="field mb2">
-      <%= f.label :email, "メールアドレス" %><br />
+<h2 class="form_title">管理者ログイン</h2>
+<div class="post_form">
+  <%= form_with model: @admin, url: session_path(resource_name) do |f| %>
+    <div class="form_field">
+      <%= f.label :email, "メールアドレス" %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
     </div>
-
-    <div class="field mb2">
-      <%= f.label :password, "パスワード" %><br />
+    <div class="form_field">
+      <%= f.label :password, "パスワード" %>
       <%= f.password_field :password, autocomplete: "current-password" %>
     </div>
-
-    <div class="actions">
-      <%= f.submit "ログイン", class: "btn btn-primary" %>
+    <div class="form_submit">
+      <%= f.submit "ログイン", class: "submit-btn" %>
     </div>
   <% end %>
-</section>
- <h2>email: "admin@gmail.com"←あとで消すこと</h2>
- <h2> password:"121212"←あとで消すこと</h2>
-
+</div>
+<h2>仮email: "admin@gmail.com"</h2>
+<h2>仮password:"121212"</h2>
