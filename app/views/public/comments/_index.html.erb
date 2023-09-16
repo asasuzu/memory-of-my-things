@@ -1,0 +1,19 @@
+<% post.comments.each do |comment| %>
+  <div class="comment__list">
+    <p class="comment__user-avatar">
+      <%= image_tag comment.user.get_profile_image(120, 120) %>
+    </p>
+    <div class="comment__details">
+      <div class="comment__user-name">
+        <%= comment.user.name %>
+      </div>
+      <div class="comment__text-box">
+        <p><%= comment.comment %></p>
+        <% if comment.user == current_user %>
+          <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true  %>
+        <% end %>
+        <span class="comment__date"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+      </div>
+    </div>
+  </div>
+<% end %>

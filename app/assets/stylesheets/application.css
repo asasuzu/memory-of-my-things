@@ -93,7 +93,7 @@ nav a:hover {
   max-height: 37em; /* 適切な値を設定 */
 }
 
-.overlay-text {
+.main-visual__text {
   position: absolute;
   left: 31%;
   top: 20%;
@@ -104,8 +104,6 @@ nav a:hover {
   width: 60%;
   text-align: left;
 }
-
-
 
 .overlay-text h3 {
   font-size: 24px;
@@ -182,7 +180,7 @@ nav a:hover {
 
 /* ページネーションの文字にカーソルを載せた時 */
 .pagination a:hover{
-  background-color: #818181;
+  background-color: rgba(129, 129, 129, 0.5);
   color: #FFF;
   border-radius: 20%;
 }
@@ -375,17 +373,13 @@ nav a:hover {
   flex-direction: column;
   align-items: center;
   text-align: center;
-}
-
-.mypage-title {
-  font-size: 24px;
-  margin-bottom: 5px;
+  margin-bottom: 50px;
 }
 
 .user-name {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin: 10px;
 }
 
 .user-image {

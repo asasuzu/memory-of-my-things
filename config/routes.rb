@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     get "users/mypage" => "users#show", as: 'mypage'
     get 'users/mypage/edit' => 'users#edit', as: 'edit_mypage'
     patch 'users/mypage' => 'users#update', as: 'update_mypage'
+    get 'users/mypage/flowering' => 'users#flowering', as: 'mypage_flowering'
     get "posts_search" => "searches#posts_search"
     resources :users, only: [:show, :edit, :update]
     resources :posts do

@@ -4,16 +4,13 @@
   </div>
 
   <div class="post-detail__content">
-    <!-- 投稿タイトル -->
     <h2 class="post-detail__title">
       <% if !@post.is_public? %>
         <i class="fas fa-lock"></i>
       <% end %>
       <%= @post.title %>
     </h2>
-
     <p>一緒に過ごした期間：<%= @post.spend_time_i18n %></p>
-
     <div class="post-detail__description">
       <div class="description__title">
         <h4>別れの言葉</h3>
@@ -43,36 +40,18 @@
         <%= link_to '投稿を編集（削除）', edit_post_path(@post), class: 'edit-button' %>
       <% end %>
     </div>
-
-    <!-- コメントゾーン -->
-    <div class="post-detail__comment">
-      <p>コメント（<%= @post.comments.count %>）</p>
-      <% @post.comments.each do |comment| %>
-        <!-- コメントリスト -->
-        <div class="comment__list">
-          <p class="comment__user-avatar">
-            <%= image_tag comment.user.get_profile_image(120, 120) %>
-          </p>
-          <div class="comment__details">
-            <div class="comment__user-name">
-              <%= comment.user.name %>
-            </div>
-            <div class="comment__text-box">
-              <p><%= comment.comment %></p>
-              <% if comment.user == current_user %>
-                <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
-              <% end %>
-              <span class="comment__date"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></span>
-            </div>
-          </div>
-        </div>
-      <% end %>
+    
+    <!-- コメント関連 -->
+    <div id="comments-counter" class="post-detail__comment">
+      <%= render "public/comments/counter", post: @post %>
     </div>
+    
+    <div id="comments-index">
+      <%= render "public/comments/index", post: @post %>
+    </div>
+    
     <div class="comment__form">
-      <%= form_with(model: [@post, @comment], local: false) do |f| %>
-        <%= f.text_area :comment, rows: '3', placeholder: "コメントをここに" %>
-        <p><%= f.submit "送信する" %></p>
-      <% end %>
+      <%= render "public/comments/form", post: @post, comment: @comment %>
     </div>
   </div>
 </div>

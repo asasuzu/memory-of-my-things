@@ -5,10 +5,10 @@ class Public::UsersController < ApplicationController
   def show
     if params[:show_private] == '1'
     # '1' の場合、プライベートな投稿も表示
-      @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(4)
+      @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(16)
     else
     # それ以外の場合、公開されている投稿のみ表示
-      @posts = @user.posts.public_and_newest.page(params[:page]).per(4)
+      @posts = @user.posts.public_and_newest.page(params[:page]).per(16)
     end
   end
 
@@ -21,6 +21,10 @@ class Public::UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def flowering
+    @flowering_posts = @user.flowering_posts.page(params[:page]).per(16)
   end
 
   private
