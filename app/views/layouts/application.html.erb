@@ -11,7 +11,7 @@
   </head>
 
   <body>
-    <header class="<%= (admin_signed_in? ? "admin_header" : "" ) %>">
+    <header>
       <div class="header-content">
         <%= link_to (admin_signed_in? ? admin_reports_path : root_path ), class: "logo" do %>
           <%= image_tag 'logo.png', alt: '私と物のものがたり' %>
@@ -21,7 +21,7 @@
             <h2>管理者ログイン中</h2>
           </div>
         <% end %>
-        <%= link_to '管理者ログイン←後で消す', new_admin_session_path %>
+        <%#= link_to '管理者ログイン←後で消す', new_admin_session_path %>
         <nav>
           <ul>
             <% if admin_signed_in? %>

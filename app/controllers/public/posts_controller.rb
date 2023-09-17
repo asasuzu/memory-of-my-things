@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :search]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :ensure_post, only: [:show, :edit, :update, :destroy]
 
   def new
@@ -43,7 +43,14 @@ class Public::PostsController < ApplicationController
 
   def destroy
     if @post.destroy
-      redirect_to posts_path, notice: "削除に成功しました."
+      # 管理者がログインしているかを確認
+      if admin_signed_in?
+        # 管理者側のページにリダイレクト
+        redirect_to admin_reports_path, notice: "削除に成功しました"
+      else
+        # 通常のユーザーの場合、投稿一覧ページにリダイレクト
+        redirect_to posts_path, notice: "削除に成功しました"
+      end
     else
       @comment = Comment.new
       render 'edit'
@@ -70,4 +77,5 @@ class Public::PostsController < ApplicationController
   def ensure_post
     @post = Post.find(params[:id])
   end
+
 end

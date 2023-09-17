@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :flowers, dependent: :destroy
   
 
-  validates :name, presence: true, length: { minimum: 1, maximum: 50 }
+  validates :name, presence: true, length: { minimum: 1, maximum: 12 }
 
   # ユーザーが花むけした投稿を取得するメソッド
   def flowering_posts

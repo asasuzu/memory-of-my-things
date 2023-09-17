@@ -39,8 +39,10 @@ Rails.application.routes.draw do
   #管理者側
   namespace :admin do
     # root to: "reports#index"
-    resources :posts, only: [:destroy]
-    resources :users, only: [:index, :show, :edit, :update]
+    resources :posts, only: [:show, :destroy] do
+      resources :comments, only: [:destroy]
+    end
+    resources :users, only: [:index, :show, :update]
     resources :messages, only: [:index, :create, :edit, :update]
     resources :reports, only: [:index, :edit, :update, :destroy]
   end

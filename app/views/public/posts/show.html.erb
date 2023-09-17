@@ -1,3 +1,9 @@
+<% if admin_signed_in? %>
+<div class="admin-btn">
+  <%= link_to '不適切な投稿のため削除', @post, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'red-btn' %>
+</div>
+<% end %>
+
 <div class="post-detail">
   <div class="post-detail__image">
     <%= image_tag @post.get_image(700, 700) %>
@@ -13,16 +19,17 @@
     <p>一緒に過ごした期間：<%= @post.spend_time_i18n %></p>
     <div class="post-detail__description">
       <div class="description__title">
-        <h4>別れの言葉</h3>
+        <h4>別れの言葉</h4>
       </div>
       <%= @post.body %>
     </div>
 
-    <!-- お花機能 -->
-    <div id="flower-btn_<%= @post.id %>">
-      <%= render "public/flowers/flower_btn", post: @post %>
-    </div>
-
+    <!-- お花機能 サインインしている時のみ表示-->
+    <% if user_signed_in? %>
+      <div id="flower-btn_<%= @post.id %>">
+        <%= render "public/flowers/flower_btn", post: @post %>
+      </div>
+    <% end %>
     <!-- 投稿ユーザー情報 -->
     <div class="post-detail__user-info">
       <div class="user-info__avatar">
@@ -49,9 +56,14 @@
     <div id="comments-index">
       <%= render "public/comments/index", post: @post %>
     </div>
-    
-    <div class="comment__form">
-      <%= render "public/comments/form", post: @post, comment: @comment %>
-    </div>
+<% if user_signed_in? %>
+  <div class="comment__form">
+    <%= render "public/comments/form", post: @post, comment: @comment %>
+  </div>
+<% elsif !admin_signed_in? %>
+  <div class="login-btn">
+    <%= link_to 'コメントの送信には、ログインが必要です', new_user_session_path, class: 'edit-btn' %>
+  </div>
+<% end %>
   </div>
 </div>

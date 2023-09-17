@@ -1,2 +1,45 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<div class="admin-content">
+<h2><%= @user.name %> さんの会員情報詳細</h2>
+  <div class="user-image">
+    <%= image_tag @user.get_profile_image(300, 300) %>
+  </div>
+  <table>
+    <thead>
+      <th>会員ID</th>
+      <th>名前</th>
+      <th>Email</th>
+      <th class="table-row">会員<br>ステータス</th>
+    </thead>
+  <tbody>
+    <tr>
+      <td><%= @user.id %></td>
+      <td><%= @user.name %></td>
+      <td><%= @user.email %></td>
+      <td>
+        <% if @user.is_active? %>
+          <span class="active-status">有効</span>
+        <% else %>
+          <span class="inactive-status">利用停止</span>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+      <h3 style = "margin: 10px">会員ステータスを変更する</h3>
+      <%= form_with model:@user, url: admin_user_path(@user) do |f| %>
+      <%= f.radio_button :is_active, true %><%= f.label :is_active, "有効　", class: "active-status" %>
+      <%= f.radio_button :is_active, false %><%= f.label :is_active, "利用停止", class: "inactive-status" %>
+      <%= f.submit "更新" %>
+       
+        <% end %>
+
+</div>
+<h3 style = "margin-left: 20px"><%= @user.name %> さんの投稿一覧</h3>
+
+<%= render 'public/posts/index',posts: @posts %>
+
+
+
+
+

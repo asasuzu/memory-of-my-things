@@ -1,2 +1,28 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+<div class="admin-content">
+  <h2>会員一覧</h2>
+  <table>
+    <thead>
+      <th class="table-row">会員ID</th>
+      <th>名前</th>
+      <th class="table-row">会員<br>ステータス</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.name %></td>
+          <td>
+            <% if user.is_active? %>
+              <span class="active-status">有効</span>	
+            <% else %>
+              <span class="inactive-status">利用停止</span>
+            <% end %>
+          </td>
+          <td><%= link_to "詳細", admin_user_path(user) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @users %>
+</div>
