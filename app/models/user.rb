@@ -8,18 +8,18 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :flowers, dependent: :destroy
-  
+  has_many :reports, dependent: :destroy
 
-  validates :name, presence: true, length: { minimum: 1, maximum: 12 }
+  validates :name, presence: true, length: { maximum: 12 }
 
   # ユーザーが花むけした投稿を取得するメソッド
   def flowering_posts
     Post.joins(:flowers).where(flowers: { user_id: id }).order(created_at: :desc)
   end
-  
+
   # ゲストユーザーのメールアドレス
   GUEST_USER_EMAIL = "guest@example.com"
-  
+
   # ゲストユーザーを作成するメソッド
   def self.create_guest
     find_or_create_by!(email: GUEST_USER_EMAIL) do |user|

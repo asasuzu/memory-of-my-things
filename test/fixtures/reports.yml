@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reason: MyText
+  user_id: 1
+  reported_item_id: 1
+  reported_item_type: MyString
+  status: 1
+  default: 
+
+two:
+  reason: MyText
+  user_id: 1
+  reported_item_id: 1
+  reported_item_type: MyString
+  status: 1
+  default: 

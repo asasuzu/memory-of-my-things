@@ -14,11 +14,18 @@ ja:
         one_to_three_years: "１年以上３年未満"
         three_to_five_years: "３年以上５年未満"
         five_or_more_years: "５年以上"
+    report:
+      status:
+        waiting: "対応待ち"
+        keep: "保留"
+        finish: "対応済み"
   activerecord:
     attributes:
       post:
         title: "タイトル"
         body: "別れの言葉"
+      report:
+       reason: "通報理由"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

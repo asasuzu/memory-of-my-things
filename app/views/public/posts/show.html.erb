@@ -40,7 +40,7 @@
         <p class="user-info__post-date">投稿日：<%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
       </div>
     </div>
-
+<%= link_to 'この投稿を通報する', new_post_report_path(post_id: @post.id) %>
     <!-- 編集ボタン -->
     <div class="edit-button-container">
       <% if @post.user == current_user %>

@@ -17,6 +17,7 @@
         <%= link_to '不適切なコメントのため削除', post_comment_path(comment.post, comment), method: :delete,
         data: { confirm: '本当に削除してよろしいですか？' }, remote: true %>
       <% end %>
+      <%= link_to 'このコメントを通報する', new_post_comment_report_path(post_id: post.id, comment_id: comment.id) %>
       </div>
     </div>
   </div>
