@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     patch 'users/mypage' => 'users#update', as: 'update_mypage'
     get 'users/mypage/flowering' => 'users#flowering', as: 'mypage_flowering'
     get "posts_search" => "searches#posts_search"
-    resources :users, only: [:show, :edit, :update]
+    resources :users, only: [:show]
     resources :posts do
       resources :comments, only: [:create, :destroy] do
         resources :reports, only: [:new, :create]
@@ -47,7 +47,11 @@ Rails.application.routes.draw do
     end
     resources :users, only: [:index, :show, :update]
     resources :messages, only: [:index, :create, :edit, :update]
-    resources :reports, only: [:index, :edit, :update, :destroy]
+    resources :reports, only: [:index, :show, :update, :destroy] do
+      collection do
+        delete 'destroy_selected', to: 'reports#destroy_selected'
+      end
+    end
   end
 
 end

@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :reports, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 12 }
+  
 
   # ユーザーが花むけした投稿を取得するメソッド
   def flowering_posts

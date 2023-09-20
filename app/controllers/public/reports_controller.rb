@@ -1,5 +1,6 @@
 class Public::ReportsController < ApplicationController
-  before_action :ensure_reported_item, only: [:new, :create]
+  before_action :authenticate_user!
+  before_action :ensure_reported_item
 
   def new
     @report = @item_type.reports.new

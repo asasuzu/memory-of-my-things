@@ -4,7 +4,7 @@ class Report < ApplicationRecord
   # reported_itemはPostモデルとCommentモデルに関連付いている。
   belongs_to :reported_item, polymorphic: true
 
-  validates :reason, presence: true, length: { maximum: 300 }
+  validates :reason, presence: true, length: { maximum: 400 }
 
   enum status: {
   waiting: 0,  # 対応待ち
@@ -12,6 +12,13 @@ class Report < ApplicationRecord
   finish: 2    # 対応済み
   }
 
-
+  # reported_item_typeを日本語に変換するメソッド
+  def reported_item_type_ja
+    if reported_item_type == "Post"
+      "投稿"
+    elsif reported_item_type == "Comment"
+      "コメント"
+    end
+  end
 
 end

@@ -1,7 +1,7 @@
 <% if admin_signed_in? %>
-<div class="admin-btn">
-  <%= link_to '不適切な投稿のため削除', @post, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'red-btn' %>
-</div>
+  <div class="admin-btn">
+    <%= link_to '不適切な投稿のため削除', @post, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'red-btn' %>
+  </div>
 <% end %>
 
 <div class="post-detail">
@@ -23,13 +23,15 @@
       </div>
       <%= @post.body %>
     </div>
-
-    <!-- お花機能 サインインしている時のみ表示-->
-    <% if user_signed_in? %>
+    <% if !admin_signed_in? %>
+      <!-- お花機能 -->
       <div id="flower-btn_<%= @post.id %>">
         <%= render "public/flowers/flower_btn", post: @post %>
       </div>
+    <% else %>
+      花むけ（<%= @post.flowers.count %>）
     <% end %>
+
     <!-- 投稿ユーザー情報 -->
     <div class="post-detail__user-info">
       <div class="user-info__avatar">
@@ -40,30 +42,38 @@
         <p class="user-info__post-date">投稿日：<%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
       </div>
     </div>
-<%= link_to 'この投稿を通報する', new_post_report_path(post_id: @post.id) %>
+    <!--管理人がログインしていない＆投稿ユーザーが現在のユーザーではない＆すでに通報していない-->
+    <% if !admin_signed_in? && current_user != @post.user && !@post.already_reported_by?(current_user) %>
+      <%= link_to 'この投稿を通報する', new_post_report_path(post_id: @post.id) %>
+    <% end %>
+    <% if @post.already_reported_by?(current_user) %>
+      通報済み
+    <% end %>
+
     <!-- 編集ボタン -->
     <div class="edit-button-container">
       <% if @post.user == current_user %>
         <%= link_to '投稿を編集（削除）', edit_post_path(@post), class: 'edit-btn' %>
       <% end %>
     </div>
-    
+
     <!-- コメント関連 -->
     <div id="comments-counter" class="post-detail__comment">
       <%= render "public/comments/counter", post: @post %>
     </div>
-    
+
     <div id="comments-index">
       <%= render "public/comments/index", post: @post %>
     </div>
-<% if user_signed_in? %>
-  <div class="comment__form">
-    <%= render "public/comments/form", post: @post, comment: @comment %>
-  </div>
-<% elsif !admin_signed_in? %>
-  <div class="login-btn">
-    <%= link_to 'コメントの送信には、ログインが必要です', new_user_session_path, class: 'edit-btn' %>
-  </div>
-<% end %>
+
+    <% if user_signed_in? %>
+      <div class="comment__form">
+        <%= render "public/comments/form", post: @post, comment: @comment %>
+      </div>
+    <% elsif !admin_signed_in? %>
+      <div class="login-btn">
+        <%= link_to 'コメントの送信には、ログインが必要です', new_user_session_path, class: 'edit-btn' %>
+      </div>
+    <% end %>
   </div>
 </div>

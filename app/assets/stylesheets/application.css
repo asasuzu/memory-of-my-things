@@ -484,7 +484,7 @@ nav a:hover {
 
 
 table {
-  margin: 10px auto;
+  margin: 20px auto;
   border-collapse: collapse;
   border: 1px solid #ccc;
   width: 100%; /* テーブル幅を100%に設定 */
@@ -555,6 +555,11 @@ input[type="submit"] {
 
 .search-button {
   white-space: nowrap;
+}
+
+.report_reason {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 footer {

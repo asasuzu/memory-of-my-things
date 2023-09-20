@@ -1,17 +1,21 @@
 <div class="post-list">
-  <% posts.each do |post| %>
-    <%= link_to post_path(post.id), class: 'post-list__link' do %>
-      <div class="post-list__item">
-        <%= image_tag post.get_image(400, 400) %>
-        <h4 class="post-list__title">
-          <% if !post.is_public? %>
-            <i class="fas fa-lock"></i>
-          <% end %>
-          <%= post.title %>
-        </h4>
-        <p class="post-list__description"><%= post.body %></p>
-      </div>
+  <% if posts.present? %>
+    <% posts.each do |post| %>
+      <%= link_to post_path(post.id), class: 'post-list__link' do %>
+        <div class="post-list__item">
+          <%= image_tag post.get_image(400, 400) %>
+          <h4 class="post-list__title">
+            <% if !post.is_public? %>
+              <i class="fas fa-lock"></i>
+            <% end %>
+            <%= post.title %>
+          </h4>
+          <p class="post-list__description"><%= post.body %></p>
+        </div>
+      <% end %>
     <% end %>
+  <% else %>
+    <h3>投稿はありません</h3>
   <% end %>
 </div>
 <div class="post-list__paginate"><%= paginate posts %></div>
