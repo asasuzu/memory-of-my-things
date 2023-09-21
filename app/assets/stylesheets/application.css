@@ -55,7 +55,7 @@ header {
 nav ul {
   display: flex;
   list-style: none;
-  font-size:min(3.5vw, 24px);
+  font-size: unquote("min(3.5vw, 24px)"); /*unquoteをつけないとプリコンパイル時エラーになる*/
 }
 
 nav li {
