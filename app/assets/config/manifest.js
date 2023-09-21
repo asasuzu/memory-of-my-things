@@ -1,3 +1,3 @@
 //= link_tree ../images
 //= link_directory ../stylesheets .css
-//= link_tree ../assets/audios
+//= link_tree ../audios
