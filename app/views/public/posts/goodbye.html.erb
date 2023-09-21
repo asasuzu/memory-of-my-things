@@ -1,0 +1,12 @@
+<div class="centered-image">
+  <%= image_tag @post.get_image(300, 300) %>
+  <div class="flowers">
+  <% @post.flowers.each do |flower| %>
+    <%= image_tag 'colorful_flower.png', alt: '花の画像' %>
+  <% end %>
+  </div>
+</div>
+      <!--<%#= audio_tag('test.mp3', controls: true, loop: true ) %>-->
+  
+  
+

@@ -1,5 +1,5 @@
 <% if admin_signed_in? %>
-  <div class="admin-btn">
+  <div class="btn-container">
     <%= link_to '不適切な投稿のため削除', @post, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'red-btn' %>
   </div>
 <% end %>
@@ -16,7 +16,19 @@
       <% end %>
       <%= @post.title %>
     </h2>
-    <p>一緒に過ごした期間：<%= @post.spend_time_i18n %></p>
+    <p style="display: flex; justify-content: space-between;">
+      一緒に過ごした期間：<%= @post.spend_time_i18n %>
+      <% if @post.user == current_user %>
+        <%= link_to '投稿を編集(削除)', edit_post_path(@post) %>
+      <% end %>
+      <!--管理人がログインしていない＆投稿ユーザーが現在のユーザーではない＆すでに通報していない-->
+      <% if !admin_signed_in? && current_user != @post.user && !@post.already_reported_by?(current_user) %>
+        <%= link_to 'この投稿を通報する', new_post_report_path(post_id: @post.id) %>
+      <% end %>
+      <% if @post.already_reported_by?(current_user) %>
+        通報済み
+      <% end %>
+    </p>
     <div class="post-detail__description">
       <div class="description__title">
         <h4>別れの言葉</h4>
@@ -35,26 +47,19 @@
     <!-- 投稿ユーザー情報 -->
     <div class="post-detail__user-info">
       <div class="user-info__avatar">
-        <%= image_tag @post.user.get_profile_image(150, 150) %>
+        <%= image_tag @post.user.get_profile_image(100, 100) %>
       </div>
       <div class="user-info__details">
         <p class="user-info__name"><%= @post.user.name %></p>
         <p class="user-info__post-date">投稿日：<%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
       </div>
     </div>
-    <!--管理人がログインしていない＆投稿ユーザーが現在のユーザーではない＆すでに通報していない-->
-    <% if !admin_signed_in? && current_user != @post.user && !@post.already_reported_by?(current_user) %>
-      <%= link_to 'この投稿を通報する', new_post_report_path(post_id: @post.id) %>
-    <% end %>
-    <% if @post.already_reported_by?(current_user) %>
-      通報済み
-    <% end %>
+
+
 
     <!-- 編集ボタン -->
-    <div class="edit-button-container">
-      <% if @post.user == current_user %>
-        <%= link_to '投稿を編集（削除）', edit_post_path(@post), class: 'edit-btn' %>
-      <% end %>
+    <div class="btn-container">
+      <%= link_to 'お別れ会へ行く', goodbye_post_path(@post), class: 'bluebtn' %>
     </div>
 
     <!-- コメント関連 -->
@@ -71,8 +76,8 @@
         <%= render "public/comments/form", post: @post, comment: @comment %>
       </div>
     <% elsif !admin_signed_in? %>
-      <div class="login-btn">
-        <%= link_to 'コメントの送信には、ログインが必要です', new_user_session_path, class: 'edit-btn' %>
+      <div class="btn-container">
+        <%= link_to 'コメントの送信には、ログインが必要です', new_user_session_path, class: 'graybtn' %>
       </div>
     <% end %>
   </div>

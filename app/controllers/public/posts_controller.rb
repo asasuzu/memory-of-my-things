@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :ensure_post, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_post, only: [:show, :edit, :update, :destroy, :goodbye]
 
   def new
     @post = Post.new
@@ -17,7 +17,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.public_and_newest.page(params[:page]).per(4)
+    @posts = Post.public_and_newest.page(params[:page]).per(16)
   end
 
   def show
@@ -62,10 +62,13 @@ class Public::PostsController < ApplicationController
     spend_time = params[:spend_time]
 
     if keyword.present? || spend_time.present?
-      @result = Post.search(keyword, spend_time).page(params[:page]).per(10)
+      @result = Post.search(keyword, spend_time).page(params[:page]).per(16)
     else
       @result = []
     end
+  end
+  
+  def goodbye
   end
 
   private

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   devise_for :users, controllers: {
-  registrations: "public/registrations",
+  registrations: 'public/registrations',
   sessions: 'public/sessions'
   }
 
@@ -18,13 +18,13 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     get 'search' => 'posts#search', as: 'search_posts'
-    get "users/mypage" => "users#show", as: 'mypage'
+    get 'users/mypage' => 'users#show', as: 'mypage'
     get 'users/mypage/edit' => 'users#edit', as: 'edit_mypage'
     patch 'users/mypage' => 'users#update', as: 'update_mypage'
     get 'users/mypage/flowering' => 'users#flowering', as: 'mypage_flowering'
-    get "posts_search" => "searches#posts_search"
     resources :users, only: [:show]
     resources :posts do
+      get 'goodbye', on: :member
       resources :comments, only: [:create, :destroy] do
         resources :reports, only: [:new, :create]
       end
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
 # 管理者側
 # URL /admin/sign_in ...
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
-    sessions: "admin/sessions"
+    sessions: 'admin/sessions'
   }
 
   #管理者側

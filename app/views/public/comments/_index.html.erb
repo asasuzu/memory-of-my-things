@@ -1,7 +1,7 @@
 <% post.comments.each do |comment| %>
   <div class="comment__list">
     <p class="comment__user-avatar">
-      <%= image_tag comment.user.get_profile_image(120, 120) %>
+      <%= image_tag comment.user.get_profile_image(70, 70) %>
     </p>
     <div class="comment__details">
       <div class="comment__user-name">
@@ -9,28 +9,30 @@
       </div>
       <div class="comment__text-box">
         <p><%= comment.comment %></p>
-        <span class="comment__date"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></span>
+        <p style="display: flex; justify-content: space-between;">
+          <span class="comment__date"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></span>
 
-        <!-- 削除リンク -->
-        <% if comment.user == current_user %>
-          <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true  %>
-        <% end %>
-
-        <!-- 不適切なコメントの削除リンク（管理者のみ） -->
-        <% if admin_signed_in? %>
-          <%= link_to '不適切なコメントのため削除', post_comment_path(comment.post, comment), method: :delete,
-          data: { confirm: '本当に削除してよろしいですか？' }, remote: true %>
-        <% end %>
-
-        <!-- 通報リンク -->
-        <!--管理人がログインしていない＆投稿ユーザーが現在のユーザーではない＆すでに通報していない-->
-        <% if !admin_signed_in? && current_user != comment.user && !comment.already_reported_by?(current_user) %>
-          <%= link_to 'このコメントを通報する', new_post_comment_report_path(post_id: post.id, comment_id: comment.id) %>
-        <% end %>
-
-        <% if comment.already_reported_by?(current_user) %>
-          通報済み
-        <% end %>
+          <!-- 削除リンク -->
+          <% if comment.user == current_user %>
+            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true  %>
+          <% end %>
+  
+          <!-- 不適切なコメントの削除リンク（管理者のみ） -->
+          <% if admin_signed_in? %>
+            <%= link_to '不適切なコメントのため削除', post_comment_path(comment.post, comment), method: :delete,
+            data: { confirm: '本当に削除してよろしいですか？' }, remote: true %>
+          <% end %>
+  
+          <!-- 通報リンク -->
+          <!--管理人がログインしていない＆投稿ユーザーが現在のユーザーではない＆すでに通報していない-->
+          <% if !admin_signed_in? && current_user != comment.user && !comment.already_reported_by?(current_user) %>
+            <%= link_to 'このコメントを通報する', new_post_comment_report_path(post_id: post.id, comment_id: comment.id) %>
+          <% end %>
+  
+          <% if comment.already_reported_by?(current_user) %>
+            通報済み
+          <% end %>
+        </p>
       </div>
     </div>
   </div>
