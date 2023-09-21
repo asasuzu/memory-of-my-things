@@ -92,7 +92,7 @@ nav a:hover {
   height: 50vw;
   min-height: 350px;
   max-height: 600px;
-  background-image: url('/main-visual.png');
+  background-image: url('main-visual.png');
   background-size:100% 100%;
   background-repeat: no-repeat;
 }
@@ -554,9 +554,8 @@ input[type="submit"] {
   width :100%;
    	min-height: 70vh;
 background-color:red;
-  background-image: url('/background.jpeg');
+  background-image: url('background.jpeg');
       background-size: contain;
-/*background-color:red;*/
 background-position : center top;
 
 
@@ -567,13 +566,10 @@ background-position : center top;
 .contered-image img {
   width: 100%;
 margin: 0 auto;
-  /*height: auto;*/
-  /*object-fit: cover;*/
   border-radius: 5px;
 }
 
 .flowers{
-background-color:blue;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
