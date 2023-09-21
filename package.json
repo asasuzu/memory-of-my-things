@@ -1,5 +1,6 @@
 {
   "name": "memory-of-my-things",
+  "license": "UNLICENSED",
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-methods": "^7.18.6",
