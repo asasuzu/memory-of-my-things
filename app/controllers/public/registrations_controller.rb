@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Public::RegistrationsController < Devise::RegistrationsController
+  # ゲストユーザーがメールアドレス、パスワードを変更できないようにする。
+  before_action :ensure_guest_user, only: [:edit, :update]
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -38,7 +40,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
@@ -59,6 +61,11 @@ class Public::RegistrationsController < Devise::RegistrationsController
     mypage_path
   end
 
+  def ensure_guest_user
+    if current_user.guest?
+      redirect_to root_path, alert: 'ゲストユーザーは編集できません。'
+    end
+  end
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
