@@ -21,8 +21,6 @@
   text-decoration: none;
 }
 
-/* ここに0~479pxの範囲のスタイルを記述 */
-
 body {
   max-width: 1280px;
   margin: 0 auto;
@@ -33,6 +31,10 @@ body {
 
 main{
   flex: 1;
+}
+
+i {
+  color: gray;
 }
 
 /*-----ヘッダー-----*/
@@ -55,17 +57,17 @@ header {
 nav ul {
   display: flex;
   list-style: none;
-  font-size: unquote("min(3.5vw, 24px)"); /*unquoteをつけないとプリコンパイル時エラーになる*/
+	font-size:clamp(9px, 3vw, 24px);
 }
 
 nav li {
   text-align: center;
-  border-right: 1px solid #000;
+  border-left: 1px solid #000;
   flex: 1 0 auto;
 }
 
 nav li:first-child {
-  border-left: 1px solid #000;
+  border-left: none;
 }
 
 nav li a {
@@ -81,7 +83,7 @@ nav li a {
 }
 
 nav a:hover {
-  background-color: #ffefef;
+  background-color: #f1f1f1;
   transform: scale(1.07);
 }
 
@@ -202,11 +204,6 @@ nav a:hover {
   padding-right: 8px; /* 最後の数字のみ右パディングを適用 */
 }
 
-.search-content h2,
-.search-content h3,
-.search-content p {
-  margin-left: 20px;
-}
 
 /* -----投稿詳細----- */
 .post-detail {
@@ -272,13 +269,14 @@ nav a:hover {
 }
 
 .user-info__avatar img {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
 }
 
 .user-info__details {
   margin-left: 20px;
+  margin-top: 12px;
 }
 
 .user-info__name {
@@ -317,6 +315,7 @@ nav a:hover {
   background-color: #9f9f9f;
   border-radius: 5px;
   transition: background-color 0.3s;
+  white-space: nowrap;
 }
 
 .graybtn:hover {
@@ -356,6 +355,7 @@ nav a:hover {
 .comment__text-box {
   border: 1px solid #ccc;
   padding: 10px;
+  padding-bottom: 1px;
   border-radius: 5px;
 }
 
@@ -366,6 +366,30 @@ nav a:hover {
 
 .comment__form{
   text-align: right;
+}
+
+.icon-container {
+  display: inline-block;
+  position: relative;
+  margin-left: 10px;
+  font-size: 0.8rem;
+}
+
+.icon-container .fukidashi {
+  display: none;
+  width: 140px;
+  position: absolute;
+  top: -20%;
+  left: 200%;
+  padding: 5px;
+  border-radius: 5px;
+  background: #FFF;
+  color: red;
+  border: 1px solid;
+}
+
+.icon-container:hover .fukidashi {
+  display: block;
 }
 
 /* マイページのスタイル */
@@ -433,7 +457,7 @@ nav a:hover {
 .submit-btn {
   width: 70%;
   height: 40px;
-  font-size: 16px;
+  font-size: 1rem;
   background-color: #a0a0a0;
   color: white;
   transition: background-color 0.3s;
@@ -463,7 +487,7 @@ nav a:hover {
 
 /*---管理者側会員一覧画面---*/
 .admin-content{
-  margin: 10px auto;
+  margin: 20px auto;
   text-align: center;
   max-width: 800px;
 }
@@ -473,7 +497,7 @@ table {
   margin: 20px auto;
   border-collapse: collapse;
   border: 1px solid #ccc;
-  width: 100%; /* テーブル幅を100%に設定 */
+  width: 100%;
 }
 
 th, td {
@@ -515,7 +539,7 @@ input[type="email"],
 textarea,
 select {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
@@ -527,21 +551,42 @@ input[type="submit"] {
     }
 
 /*---検索フォーム---*/
+
+.search-form input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+
 .search-form {
+  width: 97%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  flex-wrap: wrap;
-  margin: 5px 10px;
+  margin: 10px;
 }
 
-.search-input {
-  margin-right: 10px;
-  font-size: 4px;
+.search-keyword{
+  margin-top: 17px;
+  width: 240px;
+}
+
+.search-select {
+  margin-right: 3px;
+  margin-left: 3px;
+	font-size:clamp(9px, 2vw, 12px);
+	width: 150px;
 }
 
 .search-button {
   white-space: nowrap;
+  padding: 4px;
+  margin-top: 15px;
+}
+/*---検索結果表示---*/
+.search-content h2,
+.search-content p {
+  margin-left: 20px;
 }
 
 /*---通報フォーム---*/
@@ -550,34 +595,91 @@ input[type="submit"] {
   text-overflow: ellipsis;
 }
 
-.centered-image{
+.goodbye-content{
+  margin: 20px auto;
+  padding: 0.5%;
   width :100%;
-   	min-height: 70vh;
-background-color:red;
+  max-width:700px;
   background-image: url('background.jpeg');
-      background-size: contain;
-background-position : center top;
-
-
+  background-size: contain;
   background-repeat: no-repeat; /* 画像の繰り返しを無効に */
-  margin: 0 auto;
+  overflow: hidden; /* はみ出たお花を表示しない */
+  aspect-ratio: 1 / 1;
 }
 
-.contered-image img {
+.goodbye-message {
+  width: 45vw;
+  max-width: 500px;
+  min-width: 350px;
+  text-align: center;
+  margin: 20px auto 30px;
+  background-color: #fff;
+  padding: 1.5%;
+  border-radius: 20px;
+  position: relative;
+}
+
+.goodbye-message ::before {
+  content: "";
+  /* borderで三角形を作る */
+  border: 10px solid transparent;
+  border-top: 15px solid #fff;
+  /* 配置する */
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.goodbye-message p{
+  font-size:clamp(8px, 2vw, 17px);
+}
+
+.goodbye-image{
+  margin: 0 auto;
+  width: 40%;
+  max-width: 300px;
+}
+
+.goodbye-image img {
   width: 100%;
-margin: 0 auto;
-  border-radius: 5px;
+  object-fit: contain;
+  background-color: #f0f0f0;
+  border-radius: 20px;
 }
 
 .flowers{
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
 }
 
 .flowers img{
-  width: 50px;
+  width: 5vw;
+  max-width:70px;
+  min-width:40px;
 }
+
+.goodbye-audio{
+  display: grid;
+  place-items: center;
+
+}
+.flowers-list{
+  margin: 20px;
+  text-align: center;
+}
+
+.flowers-list p {
+  display: none;
+  list-style:none;
+}
+
+.flowers-list input:checked ~ p {
+  display: block; /* チェックされたら表示 */
+}
+
+
 
 footer {
   padding: 3em;
@@ -590,12 +692,9 @@ footer {
   /* 768~1024pxが適用範囲 */
   
 nav li {
-  border-right: none;
-}
-
-nav li:first-child {
   border-left: none;
 }
+
 
 .post-list {
   grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
@@ -619,8 +718,6 @@ nav li:first-child {
 }
 
 
-
-
 }
 
 @media screen and (min-width: 1025px) {
@@ -642,6 +739,7 @@ nav li:first-child {
 .flower-text {
   font-size: 1.2rem;
 }
+
 
 }
 

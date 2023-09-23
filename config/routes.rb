@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'messages/index'
-  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   devise_for :users, controllers: {
@@ -14,7 +11,7 @@ Rails.application.routes.draw do
     delete 'guest_sign_out', to: 'public/sessions#guest_sign_out'
   end
 
-  # 会員側
+  # ユーザー側
   scope module: :public do
     root to: "homes#top"
     get 'search' => 'posts#search', as: 'search_posts'
@@ -41,12 +38,8 @@ Rails.application.routes.draw do
 
   #管理者側
   namespace :admin do
-    # root to: "reports#index"
-    resources :posts, only: [:show, :destroy] do
-      resources :comments, only: [:destroy]
-    end
     resources :users, only: [:index, :show, :update]
-    resources :messages, only: [:index, :create, :edit, :update]
+    resources :messages, only: [:index, :create, :edit, :update, :destroy]
     resources :reports, only: [:index, :show, :update, :destroy] do
       collection do
         delete 'destroy_selected', to: 'reports#destroy_selected'

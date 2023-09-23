@@ -1,22 +1,19 @@
 <div class="search-content">
   <%= render 'search-form' %>
-  
-  <% keyword = params[:keyword] %>
-  <% spend_time = params[:spend_time] %>
 
-  <h2><%= keyword.present? ? "#{keyword} の検索結果" : "検索結果" %></h2>
+  <h2><%= @keyword.present? ? "#{@keyword} の検索結果" : "検索結果" %></h2>
 
-  <% if spend_time.present? %>
-    <p>一緒に過ごした期間：<%= I18n.t("enums.post.spend_time.#{spend_time}") %></p>
+  <% if @spend_time.present? %>
+    <p>一緒に過ごした期間：<%= I18n.t("enums.post.spend_time.#{@spend_time}") %></p>
   <% end %>
 
   <% if @result.present? %>
     <%= render 'index', posts: @result %>
   <% else %>
-    <% if keyword.blank? && spend_time.blank? %>
-      <h3>キーワード、または一緒に過ごした期間を指定してください。</h3>
+    <% if @keyword.blank? && @spend_time.blank? %>
+      <p style="font-weight: bold;" >キーワード、または一緒に過ごした期間を指定してください。</p>
     <% else %>
-      <h3>見つかりませんでした。検索条件を変更して再度お試しください。</h3>
+      <p style="font-weight: bold;" >見つかりませんでした。検索条件を変更して再度お試しください。</p>
     <% end %>
   <% end %>
 </div>

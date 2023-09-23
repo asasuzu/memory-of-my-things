@@ -15,7 +15,7 @@
       <div class="header-content">
         <div class="header-logo">
           <%= link_to (admin_signed_in? ? admin_reports_path : root_path ), class: "logo" do %>
-            <%= image_tag 'logo.png', alt: '私と物のものがたり' %>
+            <%= image_tag 'logo.png', alt: '私と物のものがたり', title: "ホームへ" %>
           <% end %>
         </div>
           <% if admin_signed_in? %>

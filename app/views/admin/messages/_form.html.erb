@@ -1,0 +1,5 @@
+<%= form_with model:message, url: url do |f| %>
+	<%= render 'layouts/error_messages', resource: message %>
+	<%= f.text_field :message, class: "form_field" %>
+	<%= f.submit submit ,class: "submit-btn" %>
+<% end %>

@@ -52,23 +52,24 @@ class Public::PostsController < ApplicationController
         redirect_to posts_path, notice: "削除に成功しました"
       end
     else
-      @comment = Comment.new
+
       render 'edit'
     end
   end
   
   def search
-    keyword = params[:keyword]
-    spend_time = params[:spend_time]
+    @keyword = params[:keyword]
+    @spend_time = params[:spend_time]
 
-    if keyword.present? || spend_time.present?
-      @result = Post.search(keyword, spend_time).page(params[:page]).per(16)
+    if @keyword.present? || @spend_time.present?
+      @result = Post.search(@keyword, @spend_time).page(params[:page]).per(16)
     else
       @result = []
     end
   end
   
   def goodbye
+    @random_message = Message.limit(1).offset(rand(Message.count)).first
   end
 
   private

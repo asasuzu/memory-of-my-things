@@ -1,12 +1,36 @@
-<div class="centered-image">
-  <%= image_tag @post.get_image(300, 300) %>
-  <div class="flowers">
-  <% @post.flowers.each do |flower| %>
-    <%= image_tag 'colorful_flower.png', alt: '花の画像' %>
-  <% end %>
-  </div>
-</div>
-      <%= audio_tag('test1.mp3', controls: true, loop: true ) %>
-  
-  
+<div class="goodbye-content">
 
+  <div class="goodbye-message">
+<p>お別れ会へ来てくれてありがとう</p>
+<p><%= @random_message.message %></p>
+  </div>
+
+
+  <div class="goodbye-image">
+    <%= image_tag @post.get_image(300, 300) %>
+  </div>
+
+    <div class="flowers">
+    <% @post.flowers.each do |flower| %>
+     <p> <%= image_tag 'colorful_flower.png', alt: '花の画像' %></p>
+
+    <% end %>
+  </div>
+
+
+</div>
+
+<div class="goodbye-audio">
+  
+曲を再生 ※音量に注意※
+      <%= audio_tag('test1.mp3', controls: true, loop: true ) %>
+
+
+<div class="flowers-list">
+  <h4>花束をくださった <%= @post.flowers.count %>名の方々</h4>
+    <input type="checkbox"> 表示
+    <% @post.flowers.each do |flower| %>
+      <p><%= flower.user.name %> 様</p>
+    <% end %>
+</div>
+</div>

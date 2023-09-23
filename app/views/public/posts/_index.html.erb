@@ -6,7 +6,7 @@
           <%= image_tag post.get_image(400, 400) %>
           <h4 class="post-list__title">
             <% if !post.is_public? %>
-              <i class="fas fa-lock"></i>
+              <i style="color:black" class="fas fa-lock"></i>
             <% end %>
             <%= post.title %>
           </h4>

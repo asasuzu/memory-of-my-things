@@ -1,2 +1,24 @@
-<h1>Admin::Messages#index</h1>
-<p>Find me in app/views/admin/messages/index.html.erb</p>
+<div class="admin-content">
+  <h3>遺言登録</h3>
+  <div class="post_form">
+    <%= render 'form', message: @message, url: admin_messages_path, submit: '登録' %>
+  </div>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>遺言</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @messages.each do |message| %>
+          <tr>
+            <td><%= message.message %></td>
+            <td><%= link_to "編集／削除", edit_admin_message_path(message), class: "graybtn" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
