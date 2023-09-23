@@ -69,7 +69,8 @@ class Public::PostsController < ApplicationController
   end
   
   def goodbye
-    @random_message = Message.limit(1).offset(rand(Message.count)).first
+    random_offset = rand(Message.count)
+    @random_message = Message.offset(random_offset).first
   end
 
   private
