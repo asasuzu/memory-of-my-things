@@ -44,14 +44,14 @@ class Public::SessionsController < Devise::SessionsController
     end
   end
   
+  protected
+  
   def reject_inactive_user
     @user = User.find_by(email: params[:user][:email])
-    if @user
-      if @user.valid_password?(params[:user][:password]) && !@user.is_active
-        flash[:danger] = 'こちらのアカウントは利用停止中です。'
-        redirect_to new_user_session_path
-      end
+    if @user && @user.valid_password?(params[:user][:password]) && !@user.is_active
+      flash[:danger] = 'こちらのアカウントは利用停止中です。'
+      redirect_to new_user_session_path
     end
   end
-  
+
 end

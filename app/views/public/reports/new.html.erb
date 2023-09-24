@@ -1,16 +1,37 @@
-<%= render 'layouts/error_messages', resource: @report %>
-<% if @comment.present? %>
-  <h3>通報するコメント: <%= @comment.comment %></h3>
-  <%= form_with(model: @report, url: post_comment_reports_path(comment_id: @comment.id)) do |f| %>
-    <%= f.label :通報理由 %>
-    <%= f.text_area :reason %>
-    <%= f.submit '通報する' %>
+<div class="post_form">
+  <h2 class="form_title">通報フォーム</h2>
+  <div class="form_field">
+    <p>
+      ご報告いただいた内容は、詳細を調査の上、適切に対応いたします。
+      該当の投稿／コメントの削除をお約束するものではありませんので、あらかじめご了承ください。
+    </p>
+  </div>
+  <%= render 'layouts/error_messages', resource: @report %>
+  <% if @comment.present? %>
+    <div class="form_field">
+      <h3>通報するコメント: <%= @comment.comment %></h3>
+    </div>
+    <%= form_with(model: @report, url: post_comment_reports_path(comment_id: @comment.id)) do |f| %>
+      <div class="form_field">
+        <%= f.label :通報理由 %>
+        <%= f.text_area :reason %>
+        <div class="form_submit">
+          <%= f.submit '通報する', class: 'submit-btn' %>
+        </div>
+    <% end %>
+  <% else %>
+    <div class="form_field">
+      <h3>通報する投稿: <%= @post.title %></h3>
+    </div>
+
+      <%= form_with(model: @report, url: post_reports_path(post_id: @post.id)) do |f| %>
+        <div class="form_field">
+          <%= f.label :通報理由 %>
+          <%= f.text_area :reason %>
+        </div>
+        <div class="form_submit">
+          <%= f.submit '通報する', class: 'submit-btn' %>
+        </div>
+      <% end %>
   <% end %>
-<% else %>
-  <h3>通報する投稿: <%= @post.title %></h3>
-  <%= form_with(model: @report, url: post_reports_path(post_id: @post.id)) do |f| %>
-    <%= f.label :通報理由 %>
-    <%= f.text_area :reason %>
-    <%= f.submit '通報する' %>
-  <% end %>
-<% end %>
+</div>

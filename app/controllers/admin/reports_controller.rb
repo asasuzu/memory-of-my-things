@@ -1,9 +1,9 @@
 class Admin::ReportsController < ApplicationController
   before_action :authenticate_admin!
-  before_action :ensure_report, except: [:index, :destroy_selected]
+  before_action :ensure_report, only: [:show, :update, :destroy]
 
   def index
-    @reports = Report.order(created_at: :desc).page(params[:page])
+    @reports = Report.page(params[:page])
   end
 
   def show
@@ -13,13 +13,19 @@ class Admin::ReportsController < ApplicationController
     if @report.update(report_params)
       redirect_to admin_report_path(@report), notice: "ステータスが更新されました"
     else
+      @report.reload # 更新に失敗した時セレクトボックスの選択状態が変わらないようにするため。
       render :show
     end
   end
 
   def destroy
-    @report.destroy
-    redirect_to admin_reports_path, notice: "通報が削除されました"
+    if @report.destroy
+      redirect_to admin_reports_path, notice: "通報が削除されました"
+    else
+      flash.now[:alert] = "通報の削除に失敗しました"
+      @reports = Report.page(params[:page])
+      render :index
+    end
   end
 
   def destroy_selected

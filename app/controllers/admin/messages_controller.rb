@@ -4,7 +4,7 @@ class Admin::MessagesController < ApplicationController
 
   def index
     @message = Message.new
-    @messages = Message.all
+    @messages = Message.all.order(created_at: :desc)
   end
 
   def create
@@ -12,7 +12,7 @@ class Admin::MessagesController < ApplicationController
     if @message.save
       redirect_to admin_messages_path
     else
-      @messages = Message.all
+      @messages = Message.all.order(created_at: :desc)
       render :index
     end
   end

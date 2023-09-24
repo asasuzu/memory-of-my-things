@@ -1,5 +1,5 @@
 <div class="admin-content">
-	<h2>遺言編集／削除</h2>
+  <h2>遺言編集／削除</h2>
   <%= render 'form', message: @message, url: admin_message_path(@message), submit: '更新' %>
   <%= link_to 'この遺言を削除', admin_message_path(@message), method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'red-btn' %>
 </div>

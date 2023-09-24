@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :ensure_post, only: [:show, :edit, :update, :destroy, :goodbye]
 
   def new
@@ -12,20 +12,19 @@ class Public::PostsController < ApplicationController
     if @post.save
       redirect_to post_path(@post), notice: "投稿に成功しました"
     else
+      flash.now[:alert] = "投稿に失敗しました"
       render 'new'
     end
   end
 
   def index
-    @posts = Post.public_and_newest.page(params[:page]).per(16)
+    @posts = Post.public_and_newest.page(params[:page])
   end
 
   def show
     @comment = Comment.new
-    # 投稿が公開中　or　投稿したユーザーが現在ログイン中のユーザーの場合
-    if @post.is_public || current_user == @post.user
-    else
-    # 投稿が非公開かつ投稿したユーザーが現在ログインユーザーではない場合
+    # 投稿が非公開or投稿したユーザーが現在ログイン中のユーザーでない場合
+    unless @post.is_public || current_user == @post.user
       redirect_to root_path
     end
   end
@@ -37,26 +36,20 @@ class Public::PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to post_path(@post), notice: "更新に成功しました"
     else
-      render 'edit'
+      flash.now[:alert] = "更新に失敗しました"
+      render :edit
     end
   end
 
   def destroy
     if @post.destroy
-      # 管理者がログインしているかを確認
-      if admin_signed_in?
-        # 管理者側のページにリダイレクト
-        redirect_to admin_reports_path, notice: "削除に成功しました"
-      else
-        # 通常のユーザーの場合、投稿一覧ページにリダイレクト
-        redirect_to posts_path, notice: "削除に成功しました"
-      end
+      redirect_to posts_path, notice: "削除に成功しました"
     else
-
-      render 'edit'
+      flash.now[:alert] = "投稿の削除に失敗しました"
+      render :edit
     end
   end
-  
+
   def search
     @keyword = params[:keyword]
     @spend_time = params[:spend_time]

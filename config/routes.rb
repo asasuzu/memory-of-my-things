@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   #管理者側
   namespace :admin do
     resources :users, only: [:index, :show, :update]
+    resources :posts, only: [:destroy]
     resources :messages, only: [:index, :create, :edit, :update, :destroy]
     resources :reports, only: [:index, :show, :update, :destroy] do
       collection do

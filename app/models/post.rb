@@ -8,7 +8,7 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { maximum: 50 }
   validates :body, presence: true, length: { maximum: 400 }
 
- enum spend_time: { unknown: 0, less_than_one_year: 1, one_to_three_years: 2, three_to_five_years: 3, five_or_more_years: 4 }
+  enum spend_time: { unknown: 0, less_than_one_year: 1, one_to_three_years: 2, three_to_five_years: 3, five_or_more_years: 4 }
 
 # 公開中の投稿を絞って、新着順にデータを取得
   scope :public_and_newest, -> { order(created_at: :desc).where(is_public: true) }

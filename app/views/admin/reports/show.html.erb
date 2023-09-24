@@ -1,41 +1,66 @@
-<% if @report.reported_item.present? %>
-  <h2>通報詳細</h2>
-  <%= render 'layouts/error_messages', resource: @report %>
-  <% if @report.reported_item_type == "Comment" %>
-    <%= link_to '該当コメントが付けられた投稿へ遷移', post_path(@report.reported_item.post) %>
-    <!-- コメントの場合 -->
-    <p><strong>コメント内容:</strong> <%= @report.reported_item.comment %></p>
-  <% elsif @report.reported_item_type == "Post" %>
-    <!-- 投稿の場合 -->
-    <div class="post-detail">
-      <div class="post-detail__image">
-        <%= image_tag @report.reported_item.get_image(700, 700) %>
-      </div>
-      <div class="post-detail__content">
-        <h2 class="post-detail__title"><%= @report.reported_item.title %></h2>
-        <p><strong>別れの言葉:</strong> <%= @report.reported_item.body %></p>
-      </div>
-    </div>
-    <%= link_to '該当の投稿ページへ遷移', post_path(@report.reported_item) %>
-  <% end %>
-  <p>通報理由: <%= @report.reason %></p>
-  <p>通報日時: <%= @report.created_at.strftime('%Y/%m/%d %H:%M') %></p>
-  <p>通報者: <%= @report.user.name %></p>
-<% else %>
-  <h2>通報された<%= @report.reported_item_type_ja %>は削除されました</h2>
-  <p>通報理由: <%= @report.reason %></p>
-  <p>通報日時: <%= @report.created_at.strftime('%Y/%m/%d %H:%M') %></p>
-  <p>通報者: <%= @report.user.name %></p>
-<% end %>
+<div class="admin-content">
+  <% if @report.reported_item.present? %>
+    <h2>通報詳細</h2>
+    <div class="report_content">
+      <p><strong>通報理由</strong></p>
+      <p style="margin-bottom: 10px;"><%= @report.reason %></p>
 
-<% if @report.reported_item.present? %>
-  <p>通報ステータス: <%= @report.status_i18n %></p>
-  <%= form_with(model: @report, url: admin_report_path(@report)) do |f| %>
-    <div class="form-field">
-      <%= f.label :status, "ステータスの変更" %>
-      <%= f.select :status, Report.statuses.keys.map { |k| [I18n.t("enums.report.status.#{k}"), k] } %>
+      <p><strong>通報者</strong></p>
+      <p style="margin-bottom: 10px;"><%= link_to @report.user.name, admin_user_path(@report.user) %></p>
+
+      <p><strong>通報日時</strong></p>
+      <p style="margin-bottom: 10px;"><%= @report.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+
+      <p style="margin-bottom: 10px;"><strong>対応ステータス:</strong> <%= @report.status_i18n %></p>
+
+      <%= form_with(model: @report, url: admin_report_path(@report)) do |f| %>
+        <div class="post_form">
+          <%= f.label :status, "ステータスの変更" %>
+          <%= f.select :status, Report.statuses.keys.map { |k| [I18n.t("enums.report.status.#{k}"), k] } %>
+        </div>
+        <div class="form_submit">
+          <%= f.submit "更新", class: 'submit-btn' %>
+        </div>
+      <% end %>
     </div>
-    <%= f.submit "更新" %>
+
+    <!-- 通報対象がコメントの場合 -->
+    <% if @report.reported_item_type == "Comment" %>
+        <div class="report_content">
+      <p><strong>コメント内容</strong></p><p style="margin-bottom: 10px;"><%= @report.reported_item.comment %></p>
+      <p><strong>コメントした人</strong></p>
+      <p><%= link_to @report.reported_item.user.name, admin_user_path(@report.reported_item.user) %></p>
+      </div>
+      <%= link_to '該当コメントをされた投稿へ', post_path(@report.reported_item.post), class: "red-btn" %>
+    <!-- 通報対象が投稿の場合 -->
+    <% elsif @report.reported_item_type == "Post" %>
+      <div class="post-detail">
+        <div class="post-detail__image">
+          <%= image_tag @report.reported_item.get_image(700, 700) %>
+        </div>
+        <div class="post-detail__content">
+          <h2 class="post-detail__title"><%= @report.reported_item.title %></h2>
+          <p><strong>別れの言葉:</strong> <%= @report.reported_item.body %></p>
+          <p><strong>投稿者:</strong> <%= link_to @report.reported_item.user.name, admin_user_path(@report.reported_item.user) %></p>
+        </div>
+      </div>
+      <%= link_to '該当の投稿へ', post_path(@report.reported_item), class: "red-btn" %>
+    <% end %>
+
+  <% else %>
+    <h2>通報詳細</h2>
+
+    <div class="report_content">
+          <h3>通報された<%= @report.reported_item_type_ja %>はすでに削除されました</h3>
+      <p><strong>通報理由</strong></p>
+      <p style="margin-bottom: 10px;"><%= @report.reason %></p>
+
+      <p><strong>通報者</strong></p>
+      <p style="margin-bottom: 10px;"><%= @report.user.name %></p>
+
+      <p><strong>通報日時</strong></p>
+      <p style="margin-bottom: 10px;"><%= @report.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+
+    </div>
   <% end %>
-<% end %>
-<%= link_to "この通報を削除", admin_report_path(@report), method: :delete %>
+</div>
