@@ -1,0 +1,9 @@
+<%= form_with(model: report, url: url) do |f| %>
+  <div class="form_field">
+    <%= f.label :通報理由 %>
+    <%= f.text_area :reason, required: true, maxlength: 400 %>
+  </div>
+  <div class="form_submit">
+    <%= f.submit '通報する', class: 'submit-btn' %>
+  </div>
+<% end %>

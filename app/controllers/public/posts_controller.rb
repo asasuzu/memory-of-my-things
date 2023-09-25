@@ -55,13 +55,14 @@ class Public::PostsController < ApplicationController
     @spend_time = params[:spend_time]
 
     if @keyword.present? || @spend_time.present?
-      @result = Post.search(@keyword, @spend_time).page(params[:page]).per(16)
+      @result = Post.search(@keyword, @spend_time).page(params[:page])
     else
       @result = []
     end
   end
   
   def goodbye
+    # 管理者が登録した遺言からランダムで１つ取得する
     @random_message = Message.limit(1).offset(rand(Message.count)).first
   end
 
@@ -72,7 +73,10 @@ class Public::PostsController < ApplicationController
   end
 
   def ensure_post
-    @post = Post.find(params[:id])
+    @post = Post.find_by_id(params[:id])
+    unless @post
+      redirect_to root_path
+    end
   end
 
 end

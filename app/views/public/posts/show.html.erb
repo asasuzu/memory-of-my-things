@@ -19,11 +19,12 @@
     一緒に過ごした期間：<%= @post.spend_time_i18n %>
     <% if @post.user == current_user %>
       <%= link_to edit_post_path(@post) do %>
-              <div class="icon-container">
-        <i class="fas fa-edit"></i>編集
+        <div class="icon-container">
+          <i class="fas fa-edit"></i>編集
         </div>
       <% end %>
     <% end %>
+
     <!--管理人がログインしていない＆投稿ユーザーが現在のユーザーではない＆すでに通報していない-->
     <% if !admin_signed_in? && current_user != @post.user && !@post.already_reported_by?(current_user) %>
       <%= link_to new_post_report_path(post_id: @post.id) do %>
@@ -33,15 +34,18 @@
         </div>
       <% end %>
     <% end %>
+
     <% if @post.already_reported_by?(current_user) %>
-      <span style= "margin-left:10px; font-size: 12px;" >通報済</span>
+      <span style="margin-left:10px; font-size: 12px;">通報済</span>
     <% end %>
+
     <div class="post-detail__description">
       <div class="description__title">
         <h4>別れの言葉</h4>
       </div>
       <%= @post.body %>
     </div>
+
     <% if !admin_signed_in? %>
       <!-- お花機能 -->
       <div id="flower-btn_<%= @post.id %>">
@@ -62,9 +66,6 @@
       </div>
     </div>
 
-
-
-    <!-- 編集ボタン -->
     <div class="btn-container">
       <%= link_to 'お別れ会へ行く', goodbye_post_path(@post), class: 'bluebtn' %>
     </div>

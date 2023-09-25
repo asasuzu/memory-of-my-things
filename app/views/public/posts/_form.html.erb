@@ -7,11 +7,11 @@
     </div>
     <div class="form_field">
       <%= f.label :title, "タイトル" %>
-      <%= f.text_field :title %>
+      <%= f.text_field :title, required: true, maxlength: 50 %>
     </div>
     <div class="form_field">
       <%= f.label :body, "別れの言葉" %>
-      <%= f.text_area :body, rows: 5 %>
+      <%= f.text_area :body, rows: 5, required: true, maxlength: 400 %>
     </div>
     <div class="form_field">
       <%= f.label :spend_time, "一緒に過ごした期間" %>

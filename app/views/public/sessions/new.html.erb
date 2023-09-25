@@ -3,11 +3,11 @@
   <%= form_with model: @user, url: session_path(resource_name) do |f| %>
     <div class="form_field">
       <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
     </div>
     <div class="form_field">
       <%= f.label :password %>
-      <%= f.password_field :password, autocomplete: "current-password" %>
+      <%= f.password_field :password, autocomplete: "current-password", required: true, minlength: 6 %>
     </div>
     <% if devise_mapping.rememberable? %>
       <div class="form_field">

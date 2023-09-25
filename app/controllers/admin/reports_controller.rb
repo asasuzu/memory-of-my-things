@@ -41,7 +41,10 @@ class Admin::ReportsController < ApplicationController
   private
 
   def ensure_report
-    @report = Report.find(params[:id])
+    @report = Report.find_by_id(params[:id])
+    unless @report
+      redirect_to admin_reports_path
+    end
   end
 
   def report_params

@@ -13,6 +13,7 @@ class Admin::MessagesController < ApplicationController
       redirect_to admin_messages_path
     else
       @messages = Message.all.order(created_at: :desc)
+      flash.now[:alert] = "登録に失敗しました"
       render :index
     end
   end
@@ -24,13 +25,18 @@ class Admin::MessagesController < ApplicationController
     if @message.update(message_params)
       redirect_to admin_messages_path
     else
+      flash.now[:alert] = "更新に失敗しました"
       render :edit
     end
   end
 
   def destroy
-    @message.destroy
-    redirect_to admin_messages_path, notice: "遺言が削除されました"
+    if @message.destroy
+      redirect_to admin_messages_path, notice: "遺言が削除されました"
+    else
+      flash.now[:alert] = "遺言の削除に失敗しました"
+      render :edit
+    end
   end
 
   private
@@ -40,6 +46,10 @@ class Admin::MessagesController < ApplicationController
   end
 
   def ensure_message
-    @message = Message.find(params[:id])
+    @message = Message.find_by_id(params[:id])
+    unless @message
+      redirect_to admin_messages_path
+    end
   end
+
 end

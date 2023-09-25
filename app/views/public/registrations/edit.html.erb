@@ -4,11 +4,11 @@
     <%= render "layouts/error_messages", resource: resource %>
     <div class="form_field">
       <%= f.label :email, "メールアドレス" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
     </div>
     <div class="form_field">
       <%= f.label :current_password, "現在のパスワード" %>
-      <%= f.password_field :current_password, autocomplete: "current-password" %>
+      <%= f.password_field :current_password, autocomplete: "current-password", required: true %>
     </div>
     <div class="form_field">
       <%= f.label :password, "新しいパスワード(#{@minimum_password_length}文字以上)" %>
