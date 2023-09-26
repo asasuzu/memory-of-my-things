@@ -10,7 +10,7 @@ class Admin::MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     if @message.save
-      redirect_to admin_messages_path
+      redirect_to admin_messages_path, notice: "登録に成功しました"
     else
       @messages = Message.all.order(created_at: :desc)
       flash.now[:alert] = "登録に失敗しました"
@@ -23,7 +23,7 @@ class Admin::MessagesController < ApplicationController
 
   def update
     if @message.update(message_params)
-      redirect_to admin_messages_path
+      redirect_to admin_messages_path, notice: "更新に成功しました"
     else
       flash.now[:alert] = "更新に失敗しました"
       render :edit

@@ -204,7 +204,6 @@ nav a:hover {
   padding-right: 8px; /* 最後の数字のみ右パディングを適用 */
 }
 
-
 /* -----投稿詳細----- */
 .post-detail {
   padding: 2%;
@@ -214,6 +213,7 @@ nav a:hover {
   width: 100%;
   object-fit: contain;
   border-radius: 5px;
+  aspect-ratio: 1 / 1;
 }
 
 .post-detail__content{
@@ -697,13 +697,14 @@ select {
 }
 
 .flash-message {
-  max-width: 350px;
+  width: 95%;
+	font-size:clamp(9px, 2vw, 16px);
   border-radius: 5px;
   padding: 10px;
-  margin: 10px auto;
+  margin: 20px auto 10px;
   text-align: center;
 }
- 
+
 .flash-message.notice {
   background-color: #dbffb7;
 }
@@ -713,7 +714,6 @@ select {
   color: #930403;
   border: solid 1px #930403;
 }
-
 
 
 

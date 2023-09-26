@@ -30,7 +30,7 @@ class Public::UsersController < ApplicationController
   private
 
   def set_current_user
-    @user = current_user
+    @user = User.find(params[:id])
   end
 
   def user_params

@@ -22,7 +22,8 @@
 - 他のユーザーがどのような物を手放しているのかを知りたい時
 
 ## 設計書
-後ほど作成予定
+- ER図(https://github.com/asasuzu/memory-of-my-things/assets/133328222/bb2f2f6a-be80-4aca-ad39-21b910735804)
+
 
 ## 開発環境
 - OS：Linux(CentOS)
