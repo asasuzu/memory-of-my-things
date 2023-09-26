@@ -1,15 +1,20 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_current_user
+  before_action :authenticate_user!, except: [:show]
+  before_action :set_current_user, only: [:mypage, :edit, :update, :destroy]
 
-  def show
+  def mypage
     if params[:show_private] == '1'
     # '1' の場合、プライベートな投稿も表示
-      @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(16)
+      @posts = @user.posts.order(created_at: :desc).page(params[:page])
     else
     # それ以外の場合、公開されている投稿のみ表示
-      @posts = @user.posts.public_and_newest.page(params[:page]).per(16)
+      @posts = @user.posts.public_and_newest.page(params[:page])
     end
+  end
+  
+  def show
+    @user = User.find(params[:id])
+    @posts = @user.posts.public_and_newest.page(params[:page])
   end
 
   def edit
@@ -24,13 +29,13 @@ class Public::UsersController < ApplicationController
   end
 
   def flowering
-    @flowering_posts = @user.flowering_posts.page(params[:page]).per(16)
+    @flowering_posts = @user.flowering_posts.page(params[:page])
   end
 
   private
 
   def set_current_user
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def user_params

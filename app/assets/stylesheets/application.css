@@ -268,6 +268,10 @@ nav a:hover {
   margin-bottom: 15px;
 }
 
+.post-detail__user-info a{
+  color: black;
+}
+
 .user-info__avatar img {
   width: 80px;
   height: 80px;

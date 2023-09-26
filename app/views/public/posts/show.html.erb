@@ -58,10 +58,24 @@
     <!-- 投稿ユーザー情報 -->
     <div class="post-detail__user-info">
       <div class="user-info__avatar">
-        <%= image_tag @post.user.get_profile_image(100, 100) %>
+        <% if @post.user == current_user %>
+          <%= link_to mypage_path do %>
+            <%= image_tag @post.user.get_profile_image(100, 100) %>
+          <% end %>
+        <% else %>
+          <%= link_to user_path(@post.user) do %>
+            <%= image_tag @post.user.get_profile_image(100, 100) %>
+          <% end %>
+        <% end %>
       </div>
       <div class="user-info__details">
-        <p class="user-info__name"><%= @post.user.name %></p>
+        <p class="user-info__name">
+          <% if @post.user == current_user %>
+            <%= link_to @post.user.name, mypage_path %>
+          <% else %>
+            <%= link_to @post.user.name, user_path(@post.user) %>
+          <% end %>
+        </p>
         <p class="user-info__post-date">投稿日：<%= @post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
       </div>
     </div>

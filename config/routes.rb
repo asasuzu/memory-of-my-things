@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     get 'search' => 'posts#search', as: 'search_posts'
-    get 'users/mypage' => 'users#show', as: 'mypage'
+    get 'users/mypage' => 'users#mypage', as: 'mypage'
     get 'users/mypage/edit' => 'users#edit', as: 'edit_mypage'
     patch 'users/mypage' => 'users#update', as: 'update_mypage'
     get 'users/mypage/flowering' => 'users#flowering', as: 'mypage_flowering'
