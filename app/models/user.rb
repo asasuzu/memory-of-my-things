@@ -14,7 +14,11 @@ class User < ApplicationRecord
 
   # ユーザーが花むけした投稿を取得するメソッド
   def flowering_posts
-    Post.joins(:flowers).where(flowers: { user_id: id }).order(created_at: :desc)
+    Post.joins(:flowers, :user)
+        .where(flowers: { user_id: id })
+        .where(users: { is_active: true })
+        .where(posts: { is_public: true })
+        .order('posts.created_at DESC')
   end
 
   # ゲストユーザーのメールアドレス

@@ -23,8 +23,8 @@ class Public::PostsController < ApplicationController
 
   def show
     @comment = Comment.new
-    # 投稿が非公開or投稿したユーザーが現在ログイン中のユーザーでない場合
-    unless @post.is_public || current_user == @post.user
+    # 投稿主がアクティブかつ投稿が公開中でない、または投稿主が現在ログイン中のユーザーでない場合
+    unless @post.user.is_active? && @post.is_public || current_user == @post.user
       redirect_to root_path
     end
   end
@@ -60,7 +60,7 @@ class Public::PostsController < ApplicationController
       @result = []
     end
   end
-  
+
   def goodbye
     # 管理者が登録した遺言からランダムで１つ取得する
     @random_message = Message.limit(1).offset(rand(Message.count)).first

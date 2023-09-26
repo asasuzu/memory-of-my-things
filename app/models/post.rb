@@ -10,9 +10,10 @@ class Post < ApplicationRecord
 
   enum spend_time: { unknown: 0, less_than_one_year: 1, one_to_three_years: 2, three_to_five_years: 3, five_or_more_years: 4 }
 
-# 公開中の投稿を絞って、新着順にデータを取得
-  scope :public_and_newest, -> { order(created_at: :desc).where(is_public: true) }
-
+# 公開中の投稿に絞る、アクティブユーザーの投稿に絞る、新着順にデータを取得
+  scope :public_and_newest, -> { joins(:user).where(users: { is_active: true }).where(is_public: true).order(created_at: :desc) }
+# 公開中の投稿に絞る、新着順にデータを取得
+  scope :posts_for_admin, -> { order(created_at: :desc).where(is_public: true) }
 # 公開中の中からデータの検索（キーワードor過ごした期間）
   scope :search, ->(keyword, spend_time) {
     result = public_and_newest.where('title LIKE ? OR body LIKE ?', "%#{keyword}%", "%#{keyword}%")

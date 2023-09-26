@@ -1,8 +1,12 @@
-<div class="mypage-container">
-  <h2 class="user-name"><%= @user.name %> さん</h2>
-  <div class="user-image">
-    <%= image_tag @user.get_profile_image(300, 300) %>
+<% if @user.is_active? %>
+  <div class="mypage-container">
+    <h2 class="user-name"><%= @user.name %> さん</h2>
+    <div class="user-image">
+      <%= image_tag @user.get_profile_image(300, 300) %>
+    </div>
   </div>
-</div>
-<h3><%= @user.name %> さんの投稿一覧</h3>
-<%= render 'public/posts/index',posts: @posts %>
+  <h3><%= @user.name %> さんの投稿一覧</h3>
+  <%= render 'public/posts/index', posts: @posts %>
+<% else %>
+  <p style="text-align:center; margin-top:20px;">このユーザーは表示できません</p>
+<% end %>

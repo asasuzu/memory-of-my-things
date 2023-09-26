@@ -1,4 +1,4 @@
-# 私と物のものがたり〜Memory of My Things〜
+# 私の物がたり〜Memory of My Things〜
 
 ## サイト概要
 ### サイトテーマ

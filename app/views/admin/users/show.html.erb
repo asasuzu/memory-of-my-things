@@ -32,8 +32,11 @@
     <%= f.radio_button :is_active, false %><%= f.label :is_active, "利用停止", class: "inactive-status" %>
     <%= f.submit "更新" %>
   <% end %>
+  利用停止にした場合、そのユーザーの投稿は公開停止になります
 </div>
 
 <h3 style="margin-left: 20px"><%= @user.name %> さんの投稿一覧</h3>
-
+<% if !@user.is_active? %>
+  　※会員側には表示されてません
+<% end %>
 <%= render 'public/posts/index', posts: @posts %>

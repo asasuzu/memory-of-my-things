@@ -7,7 +7,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
-    @posts = @user.posts.public_and_newest.page(params[:page])
+    @posts = @user.posts.posts_for_admin.page(params[:page])
   end
 
   def update
@@ -16,7 +16,7 @@ class Admin::UsersController < ApplicationController
     else
       flash.now[:alert] = "ステータスの更新に失敗しました"
       @user.reload # 更新に失敗した時ラジオボタンの選択状態が変わらないようにするため。
-      @posts = @user.posts.public_and_newest.page(params[:page])
+      @posts = @user.posts.posts_for_admin.page(params[:page])
       render :show
     end
   end
