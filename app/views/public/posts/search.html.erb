@@ -4,16 +4,16 @@
   <h2><%= @keyword.present? ? "#{@keyword} の検索結果" : "検索結果" %></h2>
 
   <% if @spend_time.present? %>
-    <p>一緒に過ごした期間：<%= I18n.t("enums.post.spend_time.#{@spend_time}") %></p>
+    <h3>一緒に過ごした期間：<%= I18n.t("enums.post.spend_time.#{@spend_time}") %></h3>
   <% end %>
 
   <% if @result.present? %>
     <%= render 'index', posts: @result %>
   <% else %>
     <% if @keyword.blank? && @spend_time.blank? %>
-      <p style="font-weight: bold;" >キーワード、または一緒に過ごした期間を指定してください。</p>
+      <h3>キーワード、または一緒に過ごした期間を指定してください。</h3>
     <% else %>
-      <p style="font-weight: bold;" >見つかりませんでした。検索条件を変更して再度お試しください。</p>
+      <h3>見つかりませんでした。検索条件を変更して再度お試しください。</h3>
     <% end %>
   <% end %>
 </div>

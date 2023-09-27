@@ -15,7 +15,9 @@
         <% @messages.each do |message| %>
           <tr>
             <td><%= message.message %></td>
-            <td><%= link_to "編集／削除", edit_admin_message_path(message), class: "graybtn" %></td>
+            <td style="white-space: nowrap;">
+              <%= link_to "編集/削除", edit_admin_message_path(message) %>
+            </td>
           </tr>
         <% end %>
       </tbody>

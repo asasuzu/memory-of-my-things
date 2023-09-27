@@ -37,6 +37,6 @@
 
 <h3 style="margin-left: 20px"><%= @user.name %> さんの投稿一覧</h3>
 <% if !@user.is_active? %>
-  　※会員側には表示されてません
+  　※会員側には表示されておりません
 <% end %>
 <%= render 'public/posts/index', posts: @posts %>

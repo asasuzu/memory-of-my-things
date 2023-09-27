@@ -28,6 +28,7 @@ body {
   display:flex;
   flex-direction:column;
  	min-height: 100vh;
+ 	font-family: 'Noto Serif JP', serif;
 }
 
 main{
@@ -80,6 +81,7 @@ nav li a {
 
 .active {
   font-weight: bold;
+  background-color: #f1f1f1;
 }
 
 nav a:hover {
@@ -500,8 +502,11 @@ nav a:hover {
 }
 
 .admin-content a {
-  text-decoration: underline;
   font-weight: bold;
+}
+
+.admin-content a:hover {
+  text-decoration: underline;
 }
 
 table {
@@ -604,7 +609,7 @@ select {
 }
 /*---検索結果表示---*/
 .search-content h2,
-.search-content p {
+.search-content h3 {
   margin-left: 20px;
 }
 
@@ -651,7 +656,8 @@ select {
 }
 
 .goodbye-message p{
-  font-size:clamp(8px, 1.2vw, 18px);
+  font-size:clamp(10px, 1.2vw, 20px);
+  font-family: 'Yusei Magic', sans-serif;
 }
 
 .goodbye-image{
@@ -667,8 +673,26 @@ select {
   object-fit: contain;
   background-color: #fff;
   border-radius: 20px;
+  animation: fluffy1 3s ease infinite; 
 }
 
+@keyframes fluffy1 {
+  0% {
+    transform: translateY(0); }
+  5% {
+    transform: translateY(0); }
+  10% {
+    transform: translateY(-20px); }
+  20% {
+    transform: translateY(0); }
+  25% {
+    transform: translateY(0); }
+  30% {
+    transform: translateY(-20px); }
+  50% {
+    transform: translateY(0); }
+  100% {
+    transform: translateY(0); } }
 
 .flowers{
   width: 100%;
@@ -678,15 +702,25 @@ select {
 
 .flowers img{
   width: 6vw;
-  max-width:70px;
+  max-width:72px;
   min-width:36px;
+  animation: fuwafuwa 1s ease-in-out infinite alternate;
+}
+
+@keyframes fuwafuwa {
+  0% {
+    transform:translate(0, 0) rotate(-7deg);
+  }
+  100% {
+    transform:translate(0, 0) rotate(7deg);
+  }
 }
 
 .goodbye-audio{
   display: grid;
   place-items: center;
-
 }
+
 .flowers-list{
   margin: 20px;
   text-align: center;

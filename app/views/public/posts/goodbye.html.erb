@@ -2,7 +2,7 @@
   <div class="goodbye-message">
     <p>お別れ会へ来てくれてありがとう！</p>
     <!--「&」をつけると@rondom_messageがnilの場合、参照しなくなる-->
-    <p><%= @random_message&.message %></p>
+    <p id="typewriter" data-message="<%= @random_message&.message %>"></p>
   </div>
 
   <div class="goodbye-image">
@@ -22,7 +22,7 @@
 
   <div class="flowers-list">
     <% if @post.flowers.present? %>
-      <h4>花束をくださった <%= @post.flowers.count %>名の方々</h4>
+      <h4>花束をくださった <%= @post.flowers.count %>名の方</h4>
       <input type="checkbox"> 表示
       <% @post.flowers.each do |flower| %>
         <p><%= flower.user.name %> 様</p>
@@ -32,3 +32,24 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  const typewriter = (param) => {
+    let el = document.querySelector(param.el);
+    let speed = param.speed;
+    let string = param.string.split("");
+    string.forEach((char, index) => {
+      setTimeout(() => {
+        el.textContent += char;
+      }, speed * index);
+    });
+  };
+
+  const message = document.getElementById("typewriter").getAttribute("data-message");
+
+  typewriter({
+    el: "#typewriter",
+    string: message,
+    speed: 90,
+  });
+</script>
