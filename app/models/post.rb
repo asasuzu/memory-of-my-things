@@ -12,7 +12,7 @@ class Post < ApplicationRecord
 
 # 公開中の投稿に絞る、アクティブユーザーの投稿に絞る、新着順にデータを取得
   scope :public_and_newest, -> { joins(:user).where(users: { is_active: true }).where(is_public: true).order(created_at: :desc) }
-# 公開中の投稿に絞る、新着順にデータを取得
+# 公開中の投稿に絞る、新着順にデータを取得(管理者側で使用)
   scope :posts_for_admin, -> { order(created_at: :desc).where(is_public: true) }
 # 公開中の中からデータの検索（キーワードor過ごした期間）
   scope :search, ->(keyword, spend_time) {

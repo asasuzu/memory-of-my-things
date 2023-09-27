@@ -23,9 +23,16 @@ class Public::PostsController < ApplicationController
 
   def show
     @comment = Comment.new
+    # 管理者の場合でも非公開の投稿は見れない
+    if admin_signed_in?
+      unless @post.is_public
+        redirect_to admin_reports_path
+      end
+    else
     # 投稿主がアクティブかつ投稿が公開中でない、または投稿主が現在ログイン中のユーザーでない場合
-    unless @post.user.is_active? && @post.is_public || current_user == @post.user
-      redirect_to root_path
+      unless @post.user.is_active? && @post.is_public || current_user == @post.user
+        redirect_to root_path
+      end
     end
   end
 
@@ -78,5 +85,4 @@ class Public::PostsController < ApplicationController
       redirect_to root_path
     end
   end
-
 end

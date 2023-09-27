@@ -78,7 +78,7 @@ posts = Post.all
 posts.each do |post|
   flowers_to_create = []
 
-  (1..23).each do |i|
+  (1..15).each do |i|
     user = User.find(i)
     flowers_to_create << { user: user, post: post }
   end

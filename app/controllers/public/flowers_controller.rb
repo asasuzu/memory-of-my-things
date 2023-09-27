@@ -1,6 +1,6 @@
 class Public::FlowersController < ApplicationController
   before_action :authenticate_user!, only: [:destroy]
-  before_action :find_post, only: [:create, :destroy]
+  before_action :find_post
 
   def create
     if user_signed_in?

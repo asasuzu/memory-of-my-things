@@ -19,10 +19,10 @@
     <%= render 'form', report: @report, url: post_reports_path(post_id: @post.id) %>
   <% end %>
   <% if current_user.guest? %>
-  <p>
-    ゲストユーザーが通報した場合、<br>
-  ログアウト後にアカウント情報がリセットされるため<br>
-  管理者は通報を確認できません。ご了承ください。
-  </p>
+    <p>
+      ゲストユーザーが通報した場合、<br>
+      ログアウト後にアカウント情報がリセットされるため<br>
+      管理者は通報を確認できません。ご了承ください。
+    </p>
   <% end %>
 </div>
