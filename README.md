@@ -23,7 +23,9 @@
 - 他のユーザーがどのような物を手放しているのかを知りたい時
 
 ## 設計書
-- ER図(https://github.com/asasuzu/memory-of-my-things/assets/133328222/bb2f2f6a-be80-4aca-ad39-21b910735804)
+- ER図
+![ER図_私の物がたり](https://github.com/asasuzu/memory-of-my-things/assets/133328222/d17217f3-c9ea-4b5b-838d-9595069592fb)
+- テーブル定義書(https://docs.google.com/spreadsheets/d/1-CJR4Hc7w52VB4OWD0mgwFr5FjcnJfMK/edit#gid=84123752)
 
 
 ## 開発環境
