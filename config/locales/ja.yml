@@ -24,8 +24,12 @@ ja:
       post:
         title: "タイトル"
         body: "別れの言葉"
+        image: "画像"
       report:
        reason: "通報理由"
+      user:
+       profile_image: "画像"
+       name: "名前"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

@@ -464,7 +464,6 @@ nav a:hover {
 
 
 .file-input-label {
-
   width: 100%; /* 幅 */
   height: 100px; /* 高さ */
   border: 2px dashed silver;
@@ -472,15 +471,6 @@ nav a:hover {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-}
-
-.border-primary {
-  border: 2px solid blue; /* 青色のボーダーを2pxの太さで設定 */
-}
-
-/* ドラッグオーバー時のスタイルを追加 */
-.border-primary.dragover {
-  border: 2px dashed blue; /* 青色の破線ボーダーを2pxの太さで設定 */
 }
 
 .submit-btn {

@@ -7,6 +7,8 @@ class Post < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :body, presence: true, length: { maximum: 400 }
+  # 画像の形式、大きさの確認
+  validates :image, blob: {content_type: ['image/jpeg', 'image/png', 'image/gif'], size_range: 1..10.megabytes }
 
   enum spend_time: { unknown: 0, less_than_one_year: 1, one_to_three_years: 2, three_to_five_years: 3, five_or_more_years: 4 }
 

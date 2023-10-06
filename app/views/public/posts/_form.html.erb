@@ -5,7 +5,7 @@
 <div data-controller="file-drop"
      data-action="dragover->file-drop#dragover drop->file-drop#drop">
     <%= f.label :image, "画像を選択またはドラッグアンドドロップ", class:"file-input-label" %>
-    <%= f.file_field :image, 'data-file-drop-target': 'fileUpload' %>
+    <%= f.file_field :image, accept: "image/*", 'data-file-drop-target': 'fileUpload' %>
 </div>
 
 

@@ -60,6 +60,7 @@ gem "enum_help"
 gem 'kaminari','~> 1.2.1'
 gem 'rails-i18n'
 gem 'dotenv-rails'
+gem 'activestorage-validator'
 group :production do
   gem 'mysql2'
 end

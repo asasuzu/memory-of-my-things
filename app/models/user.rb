@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :flowers, dependent: :destroy
   has_many :reports, dependent: :destroy
-
+  validates :profile_image, blob: {content_type: ['image/jpeg', 'image/png', 'image/gif'], size_range: 1..10.megabytes }
   validates :name, presence: true, length: { maximum: 12 }
 
   # ユーザーが花むけした投稿を取得するメソッド
