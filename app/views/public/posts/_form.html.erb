@@ -1,10 +1,14 @@
 <div class="post_form">
   <%= form_with model: post do |f| %>
   	<%= render 'layouts/error_messages', resource: post %>
-    <div class="form_field">
-      <%= f.label :image, "画像" %>
-      <div><%= f.file_field :image, accept: "image/*" %></div>
-    </div>
+  	
+<div data-controller="file-drop"
+     data-action="dragover->file-drop#dragover drop->file-drop#drop">
+    <%= f.label :image, "画像を選択またはドラッグアンドドロップ", class:"file-input-label" %>
+    <%= f.file_field :image, 'data-file-drop-target': 'fileUpload' %>
+</div>
+
+
     <div class="form_field">
       <%= f.label :title, "タイトル" %>
       <%= f.text_field :title, required: true, maxlength: 50 %>
