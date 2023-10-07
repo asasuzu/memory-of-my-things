@@ -462,6 +462,9 @@ nav a:hover {
   text-align: center;
 }
 
+.post_form_image{
+  text-align:center;
+}
 
 .file-input-label {
   width: 100%; /* 幅 */

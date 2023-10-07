@@ -9,6 +9,5 @@ const application = Application.start()
 import FileDropController from './file_drop_controller'
 application.register('file-drop', FileDropController)
 
-
 const context = require.context("controllers", true, /_controller\.js$/)
 application.load(definitionsFromContext(context))

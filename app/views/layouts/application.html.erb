@@ -36,7 +36,7 @@
                 <%= link_to 'みんなの投稿', posts_path %>
               </li>
               <li class="<%= 'active' if current_page?(new_post_path) %>">
-                <%= link_to '投稿する', new_post_path %>
+                <%= link_to '投稿する', new_post_path, data: {"turbolinks" => false} %>
               </li>
               <li class="<%= 'active' if current_page?(mypage_path) %>">
                 <%= link_to 'マイページ', mypage_path %>

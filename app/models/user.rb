@@ -12,6 +12,7 @@ class User < ApplicationRecord
   validates :profile_image, blob: {content_type: ['image/jpeg', 'image/png', 'image/gif'], size_range: 1..10.megabytes }
   validates :name, presence: true, length: { maximum: 12 }
 
+
   # ユーザーが花むけした投稿を取得するメソッド
   def flowering_posts
     Post.joins(:flowers, :user)
