@@ -24,7 +24,7 @@ const opt = {
   },
 
   autoplay: {
-    delay: 300,
+    delay: 1000,
     disableOnInteraction: false, // 矢印をクリックしても自動再生を止めない
   },
 };
@@ -42,6 +42,7 @@ $(document).ready(function() {
   }
 });
 console.log(opt.slidesPerView);
+
 
 
 
