@@ -11,4 +11,39 @@
 
 <%= render 'public/posts/search-form' %>
 <h2 style = "margin-left: 20px" >新着投稿</h2>
-<%= render 'public/posts/index',posts: @posts %>
+
+<% if @posts.present? %>
+<div class="swiper">
+  <div class="swiper-wrapper">
+    <% @posts.each do |post| %>
+      <div class="swiper-slide">
+        <%= link_to post_path(post.id), class: 'post-list__link' do %>
+        <div class="top-post-list__item" >
+
+        <%= image_tag post.get_image(400, 400) %>
+        <h4 class="post-list__title">
+          <%= post.title %>
+        </h4>
+        <p class="post-list__description"><%= post.body %></p>
+
+      </div>
+      <% end %>
+      </div>
+    <% end %>
+  </div>
+    <!-- ページネーションの要素 -->
+  <div class="swiper-pagination"></div>
+  <!-- ナビゲーションボタン （前、次） -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
+
+<% else %>
+  <h3>投稿はありません</h3>
+<% end %>
+
+<script>
+  // @postsの数をjavascriptで扱えるようにする
+  var postCount = <%= @posts.length %>;
+</script>
+<%= javascript_pack_tag "posts_slide" %>

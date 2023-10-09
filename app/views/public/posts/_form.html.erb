@@ -7,9 +7,8 @@
       <%= f.label :image, raw("画像を選択する<br>またはドラッグ&ドロップ"), class: "file-input-label" %>
 
       <%= f.file_field :image, accept: "image/*", 'data-file-drop-target': 'fileUpload', style: "display:none;" %>
-      <img id="image-preview" src="#" alt="プレビュー画像" style="display: none; max-width: 300px; max-height: 300px;"
-           data-file-drop-target="imagePreview">
-      <div id="file-name-preview" data-file-drop-target="fileNamePreview"></div>
+      <img id="image-preview" src="#" alt="プレビュー画像" data-file-drop-target="imagePreview">
+      <div id="file-name-preview" data-file-drop-target="fileNamePreview" style="font-size: 5px;"></div>
     </div>
 
     <div class="form_field">
@@ -38,4 +37,4 @@
   <% end %>
 </div>
 
-<%= javascript_pack_tag "preview" %>
+<%= javascript_pack_tag "preview", 'data-turbolinks-track': 'reload' %>

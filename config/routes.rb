@@ -30,8 +30,7 @@ Rails.application.routes.draw do
     end
   end
 
-# 管理者側
-# URL /admin/sign_in ...
+
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: 'admin/sessions'
   }

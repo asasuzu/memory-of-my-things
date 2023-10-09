@@ -120,6 +120,24 @@ nav a:hover {
 	font-size:clamp(9px, 2vw, 20px);
 }
 
+.top-post-list__item{
+  width: 300px;
+  height: 300px;
+  margin: 6px auto 10px;
+}
+
+.top-post-list__item img {
+  height: 75%;
+  width: 100%;
+  object-fit: contain;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+:root {
+  --swiper-navigation-color: #a9ceec;
+  --swiper-pagination-color: #a9ceec;
+}
 
 /*-----投稿一覧-----*/
 .post-list {
@@ -183,7 +201,7 @@ nav a:hover {
 /* ページネーションのリンク文字（a） */
 .pagination a{
   color: #818181;
-  padding: 8px;
+  padding: 3px 8px;
 }
 
 /* ページネーションの文字にカーソルを載せた時 */
@@ -195,7 +213,7 @@ nav a:hover {
 
 /* 現在のページの数字についての表記 */
 .current{
-  padding: 8px 4px 8px 8px;
+  padding: 3px 5px 3px 8px;
   background-color: #818181;
   color: #FFF;
   border-radius: 20%;
@@ -464,6 +482,15 @@ nav a:hover {
 
 .post_form_image{
   text-align:center;
+  font-family: "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック体", "YuGothic", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", "verdana", sans-serif;
+  margin-bottom: 10px;
+}
+
+.post_form_image img {
+  display: none;
+  width: 150px;
+  margin: 10px auto;
+  border-radius: 5px;
 }
 
 .file-input-label {
@@ -475,6 +502,8 @@ nav a:hover {
   align-items: center;
   cursor: pointer;
 }
+
+
 
 .submit-btn {
   width: 70%;
