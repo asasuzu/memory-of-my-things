@@ -1,9 +1,3 @@
-<script>
-  // @postsの数をjavascriptで扱えるようにする
-  var postCount = <%= @posts.length %>;
-</script>
-<%= javascript_pack_tag "posts_slide" %>
-
 <div id="main-visual">
   <div class="main-visual__text">
     <h3>捨てる物。記録共有サイト</h3>
@@ -46,4 +40,14 @@
 <% else %>
   <h3>投稿はありません</h3>
 <% end %>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script>
+  // @postsの数をjavascriptで扱えるようにする
+  var postCount = <%= @posts.length %>;
+</script>
+<%= javascript_pack_tag "posts_slide" %>
+
 
