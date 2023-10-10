@@ -1,6 +1,5 @@
 // Swiperのオプションを定数化
 const opt = {
-  loop: true,
   pagination: {
     el: '.swiper-pagination',
     clickable: true, // クリック有効化
@@ -22,27 +21,36 @@ const opt = {
       slidesPerView: 2,
     },
   },
-
   autoplay: {
     delay: 1000,
     disableOnInteraction: false, // 矢印をクリックしても自動再生を止めない
   },
 };
 
-// $(document).ready(function() {
-//     let swiper = new Swiper('.swiper', opt);
-// });
+function getCurrentSlidesPerView() {
+  const windowWidth = window.innerWidth;
+  let newSlidesPerView = opt.slidesPerView;
+
+  for (const breakpoint in opt.breakpoints) {
+    if (windowWidth >= parseInt(breakpoint)) {
+      newSlidesPerView = opt.breakpoints[breakpoint].slidesPerView;
+    }
+  }
+
+  return newSlidesPerView;
+}
+
+let swiper; // Swiperを格納する変数を宣言
 
 $(document).ready(function() {
-  // スライドの枚数が表示する枚数より多い場合
-  if (postCount > opt.slidesPerView) {
-    let swiper = new Swiper('.swiper', opt); // Swiperを初期化
+  const currentSlidesPerView = getCurrentSlidesPerView();
+
+  if (postCount > currentSlidesPerView) {
+    opt.loop = true;
   } else {
-    // スライドの枚数が足りない場合、何もしない
+    // スライドの枚数が足りない場合、ループを無効に
+    opt.loop = false;
   }
+
+  swiper = new Swiper('.swiper', opt);
 });
-console.log(opt.slidesPerView);
-
-
-
-

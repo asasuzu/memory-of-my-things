@@ -1,43 +1,42 @@
 <div id="main-visual">
   <div class="main-visual__text">
     <h3>捨てる物。記録共有サイト</h3>
-    <p>日々、様々な物と出会い、必要がなくなったら手放す。<br>
-    そんな日常の小さな瞬間を<br>感謝の気持ちとともに投稿してみませんか。<br>
-    <ruby>餞<rt>はなむけ</rt></ruby>の花束を添えて、お別れ会を彩りましょう。<br>
-    手放すことは、過去を閉じるのではなく、<br>
-    新たな思い出を生み出すための一歩なのです。</p>
+    <p>
+      日々、様々な物と出会い、必要がなくなったら手放す。<br>
+      そんな日常の小さな瞬間を<br>感謝の気持ちとともに投稿してみませんか。<br>
+      <ruby>餞<rt>はなむけ</rt></ruby>の花束を添えて、お別れ会を彩りましょう。<br>
+      手放すことは、過去を閉じるのではなく、<br>
+      新たな思い出を生み出すための一歩なのです。
+    </p>
   </div>
 </div>
 
 <%= render 'public/posts/search-form' %>
-<h2 style = "margin-left: 20px" >新着投稿</h2>
+<h2 style="margin-left: 20px">新着投稿</h2>
 
 <% if @posts.present? %>
-<div class="swiper">
-  <div class="swiper-wrapper">
-    <% @posts.each do |post| %>
-      <div class="swiper-slide">
-        <%= link_to post_path(post.id), class: 'post-list__link' do %>
-        <div class="top-post-list__item" >
-
-        <%= image_tag post.get_image(400, 400) %>
-        <h4 class="post-list__title">
-          <%= post.title %>
-        </h4>
-        <p class="post-list__description"><%= post.body %></p>
-
-      </div>
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <% @posts.each do |post| %>
+        <div class="swiper-slide">
+          <%= link_to post_path(post.id), class: 'post-list__link' do %>
+            <div class="top-post-list__item">
+              <%= image_tag post.get_image(400, 400) %>
+              <h4 class="post-list__title">
+                <%= post.title %>
+              </h4>
+              <p class="post-list__description"><%= post.body %></p>
+            </div>
+          <% end %>
+        </div>
       <% end %>
-      </div>
-    <% end %>
-  </div>
+    </div>
     <!-- ページネーションの要素 -->
-  <div class="swiper-pagination"></div>
-  <!-- ナビゲーションボタン （前、次） -->
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
-</div>
-
+    <div class="swiper-pagination"></div>
+    <!-- ナビゲーションボタン （前、次） -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
 <% else %>
   <h3>投稿はありません</h3>
 <% end %>
