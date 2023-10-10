@@ -15,10 +15,10 @@
 <h2 style="margin-left: 20px">新着投稿</h2>
 
 <% if @posts.present? %>
-  <div class="swiper">
-    <div class="swiper-wrapper">
+  <div class="">
+    <div class="">
       <% @posts.each do |post| %>
-        <div class="swiper-slide">
+        <div class="">
           <%= link_to post_path(post.id), class: 'post-list__link' do %>
             <div class="top-post-list__item">
               <%= image_tag post.get_image(400, 400) %>
