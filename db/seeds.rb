@@ -34,6 +34,7 @@ user_data = [
   { email: "yamanasi@example.com", name: "やまなし", password: "password" },
   { email: "sizuoka@example.com", name: "しずおか", password: "password" },
   { email: "aiti@example.com", name: "あいち", password: "password" },
+  { email: "test@example.com", name: "テストユーザー", password: "testuser" },
 ]
 
 user_data.each do |data|

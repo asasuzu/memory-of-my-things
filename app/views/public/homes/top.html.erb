@@ -41,12 +41,11 @@
   <h3>投稿はありません</h3>
 <% end %>
 
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script>
   // @postsの数をjavascriptで扱えるようにする
-  var postCount = <%= @posts.length %>;
+  const postCount = <%= @posts.length %>;
 </script>
 <%= javascript_pack_tag "posts_slide" %>
 

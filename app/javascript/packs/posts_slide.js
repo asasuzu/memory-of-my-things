@@ -9,48 +9,48 @@ const opt = {
     prevEl: '.swiper-button-prev',
   },
   spaceBetween: 10,
-  slidesPerView: 1,
-  breakpoints: {
-    1240: {
-      slidesPerView: 4,
-    },
-    920: {
-      slidesPerView: 3,
-    },
-    600: {
-      slidesPerView: 2,
-    },
-  },
   autoplay: {
     delay: 1000,
     disableOnInteraction: false, // 矢印をクリックしても自動再生を止めない
   },
+  slidesPerView: getCurrentSlidesPerView(),
 };
 
 function getCurrentSlidesPerView() {
-  const windowWidth = window.innerWidth;
-  let newSlidesPerView = opt.slidesPerView;
+  const screenWidth = window.innerWidth; // 現在の画面幅を取得
 
-  for (const breakpoint in opt.breakpoints) {
-    if (windowWidth >= parseInt(breakpoint)) {
-      newSlidesPerView = opt.breakpoints[breakpoint].slidesPerView;
-    }
+  if (screenWidth >= 1240) {
+    return 4;
+  } else if (screenWidth >= 920) {
+    return 3;
+  } else if (screenWidth >= 600) {
+    return 2;
+  } else {
+    return 1; // 600未満の場合は1を返す
   }
-
-  return newSlidesPerView;
 }
 
-let swiper; // Swiperを格納する変数を宣言
+let swiper;
 
-$(document).ready(function() {
-  const currentSlidesPerView = getCurrentSlidesPerView();
+function initializeSwiper() {
+  opt.slidesPerView = getCurrentSlidesPerView(); // スライド表示数を更新
 
-  if (postCount > currentSlidesPerView) {
-    opt.loop = true;
-  } else {
-    // スライドの枚数が足りない場合、ループを無効に
-    opt.loop = false;
+  // 既存のSwiperインスタンスが存在する場合、破棄
+  if (swiper) {
+    swiper.destroy();
   }
-
+  // 投稿の数がスライド表示数より多ければ、ループさせる
+  opt.loop = postCount > opt.slidesPerView;
+  // 新しいSwiperインスタンスを初期化
   swiper = new Swiper('.swiper', opt);
+}
+
+// ウィンドウの幅が変更されたときにスライダーを再初期化
+window.onresize = function () {
+  initializeSwiper();
+};
+
+// ドキュメントが読み込まれたときに初期化
+$(function () {
+  initializeSwiper();
 });
