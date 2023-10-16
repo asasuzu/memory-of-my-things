@@ -10,7 +10,7 @@ const opt = {
   },
   spaceBetween: 10,
   autoplay: {
-    delay: 1000,
+    delay: 2000,
     disableOnInteraction: false, // 矢印をクリックしても自動再生を止めない
   },
   slidesPerView: getCurrentSlidesPerView(),
@@ -39,6 +39,7 @@ function initializeSwiper() {
   if (swiper) {
     swiper.destroy();
   }
+  const postCount = document.getElementById('postCount').value
   // 投稿の数がスライド表示数より多ければ、ループさせる
   opt.loop = postCount > opt.slidesPerView;
   // 新しいSwiperインスタンスを初期化
