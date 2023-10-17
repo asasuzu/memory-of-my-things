@@ -29,8 +29,9 @@
     <% if !admin_signed_in? && current_user != @post.user && !@post.already_reported_by?(current_user) %>
       <%= link_to new_post_report_path(post_id: @post.id) do %>
         <div class="icon-container">
-          <i class="far fa-flag fa-lg"></i>
-          <p class="fukidashi">この投稿を通報する</p>
+          <span id="post-report-btn" class="tooltip-target">
+            <i class="far fa-flag fa-lg"></i>
+          </span>
         </div>
       <% end %>
     <% end %>
@@ -110,3 +111,5 @@
     <% end %>
   </div>
 </div>
+
+<%= javascript_pack_tag "tooltip" %>

@@ -400,22 +400,20 @@ nav a:hover {
   color: gray;
 }
 
-.icon-container .fukidashi {
-  display: none;
-  width: 132px;
-  position: absolute;
-  top: -20%;
-  left: 200%;
-  padding: 5px;
-  border-radius: 5px;
-  background: #FFF;
-  color: red;
-  border: 1px solid;
-  white-space: nowrap;
+.tippy-box {
+  font-family: "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック体", "YuGothic", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", "verdana", sans-serif;
 }
 
-.icon-container:hover .fukidashi {
-  display: block;
+.tippy-box[data-theme~='tomato'] {
+  background-color: tomato;
+}
+
+.tippy-box[data-theme~='tomato'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: tomato;
+}
+
+.tippy-box[data-theme~='tomato'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: tomato;
 }
 
 /* マイページのスタイル */

@@ -102,7 +102,7 @@ messages = [
 Message.create!(messages)
 
 # コメントのテストデータ
-comment_texts = ["素敵な思い出ですね", "wonderful memories!", "美しい記憶ですこと"]
+comment_texts = ["素敵な思い出ですね", "wonderful memories!", "美しい記憶ですこと", "記憶・・・ワンダフォーな…記憶　それがある　これには"]
 
 # 投稿ごとにランダムに5名のユーザーを選択してコメント
 Post.all.each do |post|
