@@ -29,7 +29,7 @@
     <% if !admin_signed_in? && current_user != @post.user && !@post.already_reported_by?(current_user) %>
       <%= link_to new_post_report_path(post_id: @post.id) do %>
         <div class="icon-container">
-          <span id="post-report-btn" class="tooltip-target">
+          <span id="post-report-btn">
             <i class="far fa-flag fa-lg"></i>
           </span>
         </div>

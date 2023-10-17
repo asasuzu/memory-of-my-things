@@ -10,12 +10,12 @@
       <div class="comment__text-box">
         <p><%= comment.comment %></p>
         <span class="comment__date"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></span>
-        
+
         <!-- 削除リンク -->
         <% if comment.user == current_user %>
           <%= link_to post_comment_path(comment.post, comment), method: :delete, remote: true do %>
             <div class="icon-container">
-              <span id="comment-destroy-btn" class="tooltip-target">
+              <span id="comment-destroy-btn">
                 <i class="far fa-trash-alt fa-lg"></i>
               </span>
             </div>
@@ -33,7 +33,7 @@
         <% if !admin_signed_in? && current_user != comment.user && !comment.already_reported_by?(current_user) %>
           <%= link_to new_post_comment_report_path(post_id: post.id, comment_id: comment.id) do %>
             <div class="icon-container">
-              <span id="comment-report-btn" class="tooltip-target">
+              <span id="comment-report-btn">
                 <i class="far fa-flag fa-lg"></i>
               </span>
             </div>
