@@ -79,8 +79,10 @@ posts = Post.all
 posts.each do |post|
   flowers_to_create = []
 
-  (1..15).each do |i|
-    user = User.find(i)
+  # ユーザーID 1から23までからランダムに17名のユーザーを選択
+  random_users = User.where(id: 1..23).sample(17)
+
+  random_users.each do |user|
     flowers_to_create << { user: user, post: post }
   end
 
@@ -88,7 +90,7 @@ posts.each do |post|
 end
 
 # 遺言のテストデータ
-messages_to_create = [
+messages = [
   { message: "あなたと出会えて嬉しかったです。少しでも私の存在が、お役に立てたなら幸いです。さようなら。" },
   { message: "面倒なのに、私のことを投稿してくれてありがとう。その気持ちがとても嬉しいです。元気でね！" },
   { message: "新しいものも、あなたが私にしてくれたように、大切に使ってあげてくださいね。さようなら！" },
@@ -97,10 +99,30 @@ messages_to_create = [
   { message: "あなたの手で大切に使ってくれたおかげで、いろんな思い出がいっぱいあります。ありがとう。" },
 ]
 
-Message.create!(messages_to_create)
+Message.create!(messages)
 
+# コメントのテストデータ
+comment_texts = ["素敵な思い出ですね", "wonderful memories!", "美しい記憶ですこと"]
 
+# 投稿ごとにランダムに5名のユーザーを選択してコメント
+Post.all.each do |post|
+  random_users = User.where(id: 1..23).sample(5)
 
+  random_users.each do |user|
+    random_comment = comment_texts.sample
+    Comment.create!(user: user, post: post, comment: random_comment)
+  end
+end
 
+# 通報のテストデータ
+reports = [
+  { reason: '不適切な内容', user_id: 2, reported_item_id: 1, reported_item_type: 'Post', status: 0 },
+  { reason: '不快な気分になった。', user_id: 3, reported_item_id: 2, reported_item_type: 'Comment', status: 0 },
+  { reason: '不適切な内容だと思いました。', user_id: 4, reported_item_id: 3, reported_item_type: 'Post', status: 0 },
+  { reason: '言葉遣いが適切ではないと思いました。', user_id: 5, reported_item_id: 4, reported_item_type: 'Comment', status: 0 },
+  { reason: '不愉快になりました。', user_id: 6, reported_item_id: 5, reported_item_type: 'Post', status: 0 },
+  { reason: '中身がロボットだと思います。', user_id: 7, reported_item_id: 6, reported_item_type: 'Comment', status: 0 },
+]
 
+Report.create!(reports)
 

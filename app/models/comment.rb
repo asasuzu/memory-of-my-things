@@ -11,4 +11,6 @@ class Comment < ApplicationRecord
     reports.exists?(user_id: user.id)
   end
 
+  # 利用停止になったユーザーのコメントを非表示にするスコープ
+  scope :active_comments, -> { joins(:user).where(users: { is_active: true }) }
 end

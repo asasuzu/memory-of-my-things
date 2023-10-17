@@ -1,4 +1,4 @@
-<% post.comments.each do |comment| %>
+<% post.comments.active_comments.each do |comment| %>
   <div class="comment__list">
     <p class="comment__user-avatar">
       <%= image_tag comment.user.get_profile_image(70, 70) %>

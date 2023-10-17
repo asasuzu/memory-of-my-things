@@ -23,7 +23,7 @@ class Public::PostsController < ApplicationController
 
   def show
     @comment = Comment.new
-    # 管理者の場合でも非公開の投稿は見れない
+    # 管理者の場合でも非公開の投稿は見られないように
     if admin_signed_in?
       unless @post.is_public
         redirect_to admin_reports_path
