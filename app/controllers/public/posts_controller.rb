@@ -37,9 +37,11 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
+    redirect_to root_path unless current_user == @post.user
   end
 
   def update
+    redirect_to root_path unless current_user == @post.user
     if @post.update(post_params)
       redirect_to post_path(@post), notice: "更新に成功しました"
     else
@@ -49,6 +51,7 @@ class Public::PostsController < ApplicationController
   end
 
   def destroy
+    redirect_to root_path unless current_user == @post.user
     if @post.destroy
       redirect_to posts_path, notice: "削除に成功しました"
     else
