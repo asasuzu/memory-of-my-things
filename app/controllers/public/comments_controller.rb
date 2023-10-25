@@ -10,8 +10,11 @@ class Public::CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    redirect_to root_path unless current_user == @comment.user
-    @comment.destroy
+    if current_user == @comment.user
+      @comment.destroy
+    else
+      redirect_to root_path
+    end
   end
 
   private

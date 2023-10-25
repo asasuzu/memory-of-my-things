@@ -41,22 +41,28 @@ class Public::PostsController < ApplicationController
   end
 
   def update
-    redirect_to root_path unless current_user == @post.user
-    if @post.update(post_params)
-      redirect_to post_path(@post), notice: "更新に成功しました"
+    if current_user == @post.user
+      if @post.update(post_params)
+        redirect_to post_path(@post), notice: "更新に成功しました"
+      else
+        flash.now[:alert] = "更新に失敗しました"
+        render :edit
+      end
     else
-      flash.now[:alert] = "更新に失敗しました"
-      render :edit
+      redirect_to root_path
     end
   end
 
   def destroy
-    redirect_to root_path unless current_user == @post.user
-    if @post.destroy
-      redirect_to posts_path, notice: "削除に成功しました"
+    if current_user == @post.user
+      if @post.destroy
+        redirect_to posts_path, notice: "削除に成功しました"
+      else
+        flash.now[:alert] = "投稿の削除に失敗しました"
+        render :edit
+      end
     else
-      flash.now[:alert] = "投稿の削除に失敗しました"
-      render :edit
+      redirect_to root_path
     end
   end
 
